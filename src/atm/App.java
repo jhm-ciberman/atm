@@ -42,8 +42,10 @@ public class App extends Application {
         PersistenceService<ATM> persistenceService = new PersistenceService<>();
         atm = persistenceService.load(ATM.class, file);
 
-        System.out.println(atm.a);
-        atm.a = "ccc";
+        Seeder seeder = new Seeder();
+        seeder.seed(atm);
+
+        System.out.println(atm.users);
 
         primaryStage.setTitle("Hello World");
 
