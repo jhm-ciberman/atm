@@ -1,7 +1,7 @@
 package atm.controllers;
 
 import atm.App;
-import atm.models.User;
+import atm.models.Card;
 import atm.services.AuthService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,8 +15,11 @@ public class LoginController extends BaseController {
     @FXML
     private PasswordField pinField;
 
-    public LoginController(App app) {
+    private Card card;
+
+    public LoginController(App app, Card card) {
         super(app);
+        this.card = card;
     }
 
     @Override
@@ -26,9 +29,9 @@ public class LoginController extends BaseController {
 
     @FXML
     public void onContinuePressed(ActionEvent actionEvent) {
-        User user = atm.users.get(0);
         AuthService auth = new AuthService();
-        if (auth.check(user, pinField.getText())) {
+        if (auth.check(card, pinField.getText())) {
+            System.out.println("Login successful");
             app.changeScene(new MainMenuController(app));
         } else {
             // TODO: replace with a better error output

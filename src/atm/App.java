@@ -1,7 +1,7 @@
 package atm;
 
 import atm.controllers.BaseController;
-import atm.controllers.LoginController;
+import atm.controllers.EnterCardController;
 import atm.models.ATM;
 import atm.services.PersistenceService;
 import javafx.application.Application;
@@ -49,7 +49,7 @@ public class App extends Application {
 
         primaryStage.setTitle("Hello World");
 
-        this.changeScene(new LoginController(this));
+        this.changeScene(new EnterCardController(this));
 
         primaryStage.show();
 
@@ -69,7 +69,7 @@ public class App extends Application {
      * @param controller The controller to use as the active controller
      */
     public void changeScene(BaseController controller) {
-        URL url = getClass().getResource("views/" + controller.getViewName() + ".fxml");
+        URL url = getClass().getResource("/resources/views/" + controller.getViewName() + ".fxml");
         FXMLLoader loader = new FXMLLoader(url);
         loader.setController(controller);
         try {

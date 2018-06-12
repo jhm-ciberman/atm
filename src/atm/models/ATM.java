@@ -10,6 +10,8 @@ import java.util.List;
 public class ATM implements Serializable {
 
     public final List<User> users = new LinkedList<>();
+    public final List<Bank> banks = new LinkedList<>();
+    public final List<Card> cards = new LinkedList<>();
 
     public ATM() {
 
