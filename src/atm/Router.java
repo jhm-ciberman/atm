@@ -1,8 +1,6 @@
 package atm;
 
 import atm.controllers.*;
-import atm.exceptions.AuthenticationException;
-import atm.models.Card;
 import atm.services.Authenticatable;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,8 +32,9 @@ public class Router {
         this.changeScene(new ErrorScreenController(app, errorTitle, errorMessage));
     }
 
-    public void gotoLogin(Card card) {
-        this.changeScene(new LoginController(app, card));
+    public void gotoLogin(Authenticatable authenticatable) {
+
+        this.changeScene(new LoginController(app, authenticatable));
     }
 
     public void gotoEnterCard() {
@@ -46,13 +45,9 @@ public class Router {
         this.changeScene(new MainMenuController(app));
     }
 
-    public void handleAuthenticationException(AuthenticationException e) {
-        Authenticatable authenticatable = (e).getAuthenticatable();
-        if (authenticatable instanceof Card) {
-            this.gotoLogin((Card) authenticatable);
-        }
+    public void gotoRetrieveCard() {
+        this.changeScene(new RetrieveCardController(app));
     }
-
     /**
      * Changes the actual scene of the stage. (The content of the window)
      *

@@ -1,6 +1,7 @@
 package atm.controllers;
 
 import atm.App;
+import atm.exceptions.InvalidCardException;
 import atm.models.Card;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,7 +29,7 @@ public class EnterCardController extends BaseController {
 
 
     @FXML
-    public void onEnterCardPressed(ActionEvent event) {
+    public void onEnterCardPressed(ActionEvent event) throws InvalidCardException {
         System.out.println("Card entered " + cardNumberField.getText());
 
         BigInteger number = new BigInteger(cardNumberField.getText());
@@ -40,8 +41,7 @@ public class EnterCardController extends BaseController {
         if (card != null) {
             app.getRouter().gotoLogin(card);
         } else {
-            /// TODO: what to do if the card is not found?
-            System.out.println("Card " + number.toString() + " not found");
+            throw new InvalidCardException(number);
         }
 
     }

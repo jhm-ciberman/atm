@@ -1,6 +1,7 @@
 package atm;
 
 import atm.exceptions.AuthenticationException;
+import atm.exceptions.InvalidCardException;
 import atm.exceptions.MaxLoginAttemptsReachedException;
 
 class ExceptionHandler {
@@ -17,14 +18,7 @@ class ExceptionHandler {
      * @param e The exception to handle
      */
     void handle(Throwable e) {
-
-        if (e instanceof MaxLoginAttemptsReachedException) {
-            this.maxLoginAttemptsReachedException((MaxLoginAttemptsReachedException) e);
-            return;
-        }
-
-        if (e instanceof AuthenticationException) {
-            this.authenticationException((AuthenticationException) e);
+        if (this.tryToHandle(e)) {
             return;
         }
 
@@ -41,6 +35,32 @@ class ExceptionHandler {
 
     }
 
+
+    /**
+     * Tries to handle the passed exception
+     *
+     * @param e The exception
+     * @return True if the exception is handled. False if not
+     */
+    private boolean tryToHandle(Throwable e) {
+        if (e instanceof MaxLoginAttemptsReachedException) {
+            this.maxLoginAttemptsReachedException((MaxLoginAttemptsReachedException) e);
+            return true;
+        }
+
+        if (e instanceof AuthenticationException) {
+            this.authenticationException((AuthenticationException) e);
+            return true;
+        }
+
+        if (e instanceof InvalidCardException) {
+            this.invalidCardException((InvalidCardException) e);
+            return true;
+        }
+
+        return false;
+    }
+
     private void maxLoginAttemptsReachedException(MaxLoginAttemptsReachedException e) {
         router.gotoError(
                 "Tarjeta retenida",
@@ -52,7 +72,15 @@ class ExceptionHandler {
         router.gotoError(
                 "El pin ingresado es incorrecto",
                 "Intente nuevamente",
-                () -> router.handleAuthenticationException(e)
+                () -> router.gotoLogin(e.getAuthenticatable())
+        );
+    }
+
+    private void invalidCardException(InvalidCardException e) {
+        router.gotoError(
+                "La tarjeta ingresada no es válida",
+                "Compruebe que la tarjeta corresponde a un banco aderhido a la red del Banco de la Plaza.",
+                () -> router.gotoRetrieveCard()
         );
     }
 }

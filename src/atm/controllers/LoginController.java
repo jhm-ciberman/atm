@@ -1,8 +1,10 @@
 package atm.controllers;
 
 import atm.App;
-import atm.models.Card;
+import atm.exceptions.AuthenticationException;
+import atm.exceptions.MaxLoginAttemptsReachedException;
 import atm.services.AuthService;
+import atm.services.Authenticatable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -12,15 +14,13 @@ import javafx.scene.control.PasswordField;
  */
 public class LoginController extends BaseController {
 
-    private static final int MAX_LOGIN_ATTEMPTS = 3;
-
-    private Card card;
+    private Authenticatable authenticatable;
     @FXML
     private PasswordField pinField;
 
-    public LoginController(App app, Card card) {
+    public LoginController(App app, Authenticatable authenticatable) {
         super(app);
-        this.card = card;
+        this.authenticatable = authenticatable;
     }
 
 
@@ -30,8 +30,8 @@ public class LoginController extends BaseController {
     }
 
     @FXML
-    public void onContinuePressed(ActionEvent actionEvent) throws Exception {
-        new AuthService().check(card, pinField.getText());
+    public void onContinuePressed(ActionEvent actionEvent) throws AuthenticationException, MaxLoginAttemptsReachedException {
+        new AuthService().check(authenticatable, pinField.getText());
 
         System.out.println("Login successful");
         app.getRouter().gotoMainMenu();
@@ -40,6 +40,6 @@ public class LoginController extends BaseController {
 
     @FXML
     public void onCancelPressed(ActionEvent e) {
-        app.getRouter().gotoEnterCard();
+        app.getRouter().gotoRetrieveCard();
     }
 }

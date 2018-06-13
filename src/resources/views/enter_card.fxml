@@ -36,7 +36,7 @@
                 </Label>
                 <ImageView fitHeight="237.0" fitWidth="267.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../images/insert_card.jpg"/>
+                        <Image url="@../images/put_card.png"/>
                     </image>
                 </ImageView>
             </children>
