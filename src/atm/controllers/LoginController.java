@@ -12,15 +12,17 @@ import javafx.scene.control.PasswordField;
  */
 public class LoginController extends BaseController {
 
-    @FXML
-    private PasswordField pinField;
+    private static final int MAX_LOGIN_ATTEMPTS = 3;
 
     private Card card;
+    @FXML
+    private PasswordField pinField;
 
     public LoginController(App app, Card card) {
         super(app);
         this.card = card;
     }
+
 
     @Override
     public String getViewName() {
@@ -28,14 +30,16 @@ public class LoginController extends BaseController {
     }
 
     @FXML
-    public void onContinuePressed(ActionEvent actionEvent) {
-        AuthService auth = new AuthService();
-        if (auth.check(card, pinField.getText())) {
-            System.out.println("Login successful");
-            app.changeScene(new MainMenuController(app));
-        } else {
-            // TODO: replace with a better error output
-            System.out.println("Invalid login");
-        }
+    public void onContinuePressed(ActionEvent actionEvent) throws Exception {
+        new AuthService().check(card, pinField.getText());
+
+        System.out.println("Login successful");
+        app.getRouter().gotoMainMenu();
+
+    }
+
+    @FXML
+    public void onCancelPressed(ActionEvent e) {
+        app.getRouter().gotoEnterCard();
     }
 }

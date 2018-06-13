@@ -4,7 +4,7 @@ import atm.App;
 
 public class MainMenuController extends BaseController {
 
-    MainMenuController(App app) {
+    public MainMenuController(App app) {
         super(app);
     }
 

@@ -38,7 +38,7 @@ public class EnterCardController extends BaseController {
                 .orElse(null);
 
         if (card != null) {
-            app.changeScene(new LoginController(app, card));
+            app.getRouter().gotoLogin(card);
         } else {
             /// TODO: what to do if the card is not found?
             System.out.println("Card " + number.toString() + " not found");

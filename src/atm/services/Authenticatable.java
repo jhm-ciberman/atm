@@ -8,8 +8,10 @@ import java.io.Serializable;
  * Represents an authenticatable entity
  */
 public abstract class Authenticatable implements Serializable {
+
     private byte[] password;
     private byte[] salt;
+    private int failedLoginAttempts = 0;
 
     /**
      * Updates the password
@@ -33,5 +35,34 @@ public abstract class Authenticatable implements Serializable {
      */
     public byte[] getSalt() {
         return salt;
+    }
+
+
+    /**
+     * @return The number of failed login attempts
+     */
+    public int getFailedLoginAttempts() {
+        return failedLoginAttempts;
+    }
+
+    /**
+     * Increases the failed login attempts counter
+     */
+    public void failLogin() {
+        failedLoginAttempts++;
+    }
+
+    /**
+     * Resets the failed login attempts counter
+     */
+    public void resetLoginAttempts() {
+        failedLoginAttempts = 0;
+    }
+
+    /**
+     * @return The number of max login attempts
+     */
+    public int getMaxLoginAttempts() {
+        return 3;
     }
 }

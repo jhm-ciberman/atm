@@ -11,6 +11,7 @@ public class Card extends Authenticatable implements Serializable {
 
     private User owner;
 
+
     public Card(User owner, BigInteger number, String password) {
         this.number = number;
         this.updatePassword(password);
