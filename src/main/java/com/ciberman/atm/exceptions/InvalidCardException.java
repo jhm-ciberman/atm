@@ -5,7 +5,7 @@ import com.ciberman.atm.Views;
 import java.math.BigInteger;
 
 public class InvalidCardException extends ATMError {
-    private BigInteger cardNumber;
+    private final BigInteger cardNumber;
 
     public InvalidCardException(BigInteger cardNumber) {
         super(

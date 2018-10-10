@@ -7,6 +7,7 @@ import java.io.Serializable;
 /**
  * Represents an authenticatable entity
  */
+@SuppressWarnings("SameReturnValue")
 public abstract class Authenticatable implements Serializable {
 
     private byte[] password;
@@ -62,6 +63,7 @@ public abstract class Authenticatable implements Serializable {
     /**
      * @return The number of max login attempts
      */
+    @SuppressWarnings("SameReturnValue")
     public int getMaxLoginAttempts() {
         return 3;
     }

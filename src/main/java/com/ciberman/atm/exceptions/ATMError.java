@@ -5,12 +5,12 @@ public class ATMError extends Exception {
     private String title;
     private String description;
 
-    public ATMError() {
+    ATMError() {
         this.title = "No se pudo completar la operación";
         this.description = "";
     }
 
-    public ATMError(String title, String description) {
+    ATMError(String title, String description) {
         this.title = title;
         this.description = description;
     }

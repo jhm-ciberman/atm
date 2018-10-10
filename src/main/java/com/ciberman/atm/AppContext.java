@@ -1,7 +1,9 @@
 package com.ciberman.atm;
 
+import com.ciberman.atm.exceptions.UnauthorizedException;
 import com.ciberman.atm.services.Authenticatable;
 import com.google.inject.Singleton;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -23,6 +25,18 @@ public class AppContext {
     public @Nullable Authenticatable getAuthenticated() {
         return authenticated;
     }
+
+    /**
+     * Gets the current authenticated user. If the user is not authenticated, throw an Unauthorized Exception
+     */
+    public @NotNull Authenticatable getAuthenticatedOrFail() throws UnauthorizedException {
+        if (authenticated == null) {
+            throw new UnauthorizedException();
+        }
+        return authenticated;
+    }
+
+
 
     /**
      * Sets the current authenticated user

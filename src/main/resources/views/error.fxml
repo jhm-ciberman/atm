@@ -11,40 +11,32 @@
 <VBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" minHeight="400.0" minWidth="600.0" spacing="40.0"
       fx:controller="com.ciberman.atm.controllers.ErrorScreenController"
       xmlns="http://javafx.com/javafx/8.0.121">
-    <children>
-        <HBox alignment="CENTER" prefWidth="200.0" spacing="20.0">
-            <children>
-                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../images/error.png"/>
-                    </image>
-                </ImageView>
-                <VBox alignment="CENTER_LEFT">
-                    <children>
-                        <Label fx:id="errorTitleLabel" text="El pin ingresado es incorrecto" wrapText="true">
-                            <font>
-                                <Font name="Calibri" size="34.0"/>
-                            </font>
-                        </Label>
-                        <Label fx:id="errorMessageLabel" text="Intente nuevamente" textFill="#000000bc" wrapText="true">
-                            <font>
-                                <Font name="Calibri" size="24.0"/>
-                            </font>
-                        </Label>
-                    </children>
-                </VBox>
-            </children>
-        </HBox>
-        <Button fx:id="okButton" alignment="CENTER" mnemonicParsing="false" onAction="#onOkPressed" text="ENTENDIDO">
-            <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-            </padding>
-            <font>
-                <Font name="Calibri" size="19.0"/>
-            </font>
-        </Button>
-    </children>
     <padding>
         <Insets bottom="30.0" left="30.0" right="30.0" top="30.0"/>
     </padding>
+    <HBox alignment="CENTER" prefWidth="200.0" spacing="20.0">
+        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../images/error.png"/>
+        </ImageView>
+        <VBox alignment="CENTER_LEFT">
+            <Label fx:id="errorTitleLabel" text="El pin ingresado es incorrecto" wrapText="true">
+                <font>
+                    <Font name="Calibri" size="34.0"/>
+                </font>
+            </Label>
+            <Label fx:id="errorMessageLabel" text="Intente nuevamente" textFill="#000000bc" wrapText="true">
+                <font>
+                    <Font name="Calibri" size="24.0"/>
+                </font>
+            </Label>
+        </VBox>
+    </HBox>
+    <Button fx:id="okButton" alignment="CENTER" mnemonicParsing="false" onAction="#onOkPressed" text="ENTENDIDO">
+        <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        </padding>
+        <font>
+            <Font name="Calibri" size="19.0"/>
+        </font>
+    </Button>
 </VBox>

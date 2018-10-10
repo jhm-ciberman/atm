@@ -7,12 +7,12 @@ import java.math.BigInteger;
 
 public class Card extends Authenticatable implements Serializable {
 
-    private BigInteger number;
+    private final BigInteger number;
 
     private User owner;
 
 
-    public Card(User owner, BigInteger number, String password) {
+    public Card(BigInteger number, String password) {
         this.number = number;
         this.updatePassword(password);
     }

@@ -4,7 +4,7 @@ import com.ciberman.atm.Views;
 import com.ciberman.atm.services.Authenticatable;
 
 public class AuthenticationException extends ATMError {
-    private Authenticatable authenticatable;
+    private final Authenticatable authenticatable;
 
     public AuthenticationException(Authenticatable authenticatable) {
         super("El pin ingresado es incorrecto", "Intente nuevamente");

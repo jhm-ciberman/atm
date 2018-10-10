@@ -26,7 +26,7 @@ public class Router {
      * @return The controller
      */
     public <T> T goTo( String viewName) {
-        if (this.primaryStage == null) {
+        if (primaryStage == null) {
             System.err.println("No primary stage defined");
             return null;
         }

@@ -7,7 +7,7 @@ import java.io.*;
  *
  * @param <T> The serializable object type
  */
-public class PersistenceService<T extends Serializable> {
+class PersistenceService<T extends Serializable> {
 
     /**
      * Saves a serializable object in a file
@@ -18,14 +18,13 @@ public class PersistenceService<T extends Serializable> {
      */
     public void save(T obj, File outFile) throws IOException {
         File parent = outFile.getParentFile();
-        if (!parent.exists()) {
-            parent.mkdirs();
+        if (!parent.exists() && parent.mkdirs()) {
+            FileOutputStream f = new FileOutputStream(outFile);
+            ObjectOutputStream o = new ObjectOutputStream(f);
+            o.writeObject(obj);
+            o.close();
+            f.close();
         }
-        FileOutputStream f = new FileOutputStream(outFile);
-        ObjectOutputStream o = new ObjectOutputStream(f);
-        o.writeObject(obj);
-        o.close();
-        f.close();
     }
 
     /**

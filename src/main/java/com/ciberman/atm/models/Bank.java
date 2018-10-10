@@ -1,6 +1,6 @@
 package com.ciberman.atm.models;
 
-public class Bank {
+class Bank {
     public Bank() {
         
     }
