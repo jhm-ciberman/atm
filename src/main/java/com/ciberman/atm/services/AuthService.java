@@ -1,7 +1,5 @@
 package com.ciberman.atm.services;
 
-import com.ciberman.atm.exceptions.AuthenticationException;
-import com.ciberman.atm.exceptions.MaxLoginAttemptsReachedException;
 import com.ciberman.atm.util.Passwords;
 
 
@@ -11,10 +9,8 @@ public class AuthService {
      * Match a given password with an Authenticatable instance.
      * @param authenticatable The user to authenticate
      * @param password        The password to validate
-     * @throws AuthenticationException If the password is incorrect
-     * @throws MaxLoginAttemptsReachedException If the max login attempts is reached
      */
-    public boolean check(Authenticatable authenticatable, String password) throws AuthenticationException, MaxLoginAttemptsReachedException {
+    public boolean check(Authenticatable authenticatable, String password) {
         return (Passwords.isExpectedPassword(
                 password.toCharArray(),
                 authenticatable.getSalt(),

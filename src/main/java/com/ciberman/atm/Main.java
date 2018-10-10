@@ -1,6 +1,5 @@
 package com.ciberman.atm;
 
-import com.ciberman.atm.exceptions.ATMError;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import javafx.application.Application;
@@ -24,10 +23,9 @@ public class Main extends Application {
      * This method is called by JavaFX when the app is initialized
      *
      * @param primaryStage The primary stage object (The main window)
-     * @throws Exception Any exception
      */
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
 
 
         Router.primaryStage = primaryStage;
@@ -38,9 +36,7 @@ public class Main extends Application {
 
         Injector injector = Guice.createInjector(new AtmModule());
 
-        Thread.setDefaultUncaughtExceptionHandler((Thread thread, Throwable throwable) -> {
-            injector.getInstance(ErrorHandler.class).handle(throwable);
-        });
+        Thread.setDefaultUncaughtExceptionHandler((Thread thread, Throwable throwable) -> injector.getInstance(ErrorHandler.class).handle(throwable));
 
         Router router = injector.getInstance(Router.class);
         router.goTo(Views.ENTER_CARD);

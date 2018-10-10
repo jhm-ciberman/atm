@@ -5,7 +5,6 @@ import com.ciberman.atm.Router;
 import com.ciberman.atm.Views;
 import com.ciberman.atm.exceptions.ATMError;
 import com.ciberman.atm.exceptions.PinsDontMatchException;
-import com.ciberman.atm.exceptions.UnauthorizedException;
 import com.ciberman.atm.services.Authenticatable;
 import com.google.inject.Inject;
 import javafx.event.ActionEvent;
