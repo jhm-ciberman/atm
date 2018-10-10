@@ -1,23 +1,19 @@
 package com.ciberman.atm.controllers;
 
-import com.ciberman.atm.App;
+import com.ciberman.atm.Router;
+import com.ciberman.atm.Views;
+import com.google.inject.Inject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-public class MainMenuController extends BaseController {
+public class MainMenuController {
 
-    public MainMenuController(App app) {
-        super(app);
-    }
-
-    @Override
-    public String getViewName() {
-        return "main_menu";
-    }
+    @Inject
+    private Router router;
 
     @FXML
     public void onExitPressed(ActionEvent e) {
-        app.getRouter().gotoRetrieveCard();
+        router.goTo(Views.RETRIEVE_CARD);
     }
 
 

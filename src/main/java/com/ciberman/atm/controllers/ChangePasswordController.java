@@ -1,41 +1,39 @@
 package com.ciberman.atm.controllers;
 
-import com.ciberman.atm.App;
+import com.ciberman.atm.AppContext;
+import com.ciberman.atm.Router;
+import com.ciberman.atm.Views;
+import com.ciberman.atm.exceptions.AuthenticationException;
+import com.ciberman.atm.exceptions.UnauthorizedException;
 import com.ciberman.atm.services.Authenticatable;
+import com.google.inject.Inject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 
-public class ChangePasswordController extends BaseController {
+public class ChangePasswordController {
 
-    private Authenticatable authenticatable;
+    private AppContext appContext;
+
+    @Inject
+    private Router router;
 
     @FXML
     private PasswordField pinField;
 
-    public ChangePasswordController(App app, Authenticatable authenticatable) {
-        super(app);
-        this.authenticatable = authenticatable;
-    }
-
-    /**
-     * @return Returns the name of the fxml file (without
-     * extension) of the view related to this controller.
-     */
-    @Override
-    public String getViewName() {
-        return "change_password";
-    }
-
     @FXML
-    public void onContinuePressed(ActionEvent actionEvent) {
-        authenticatable.updatePassword(pinField.getText());
+    public void onContinuePressed(ActionEvent actionEvent) throws UnauthorizedException {
+        Authenticatable authenticated = appContext.getAuthenticated();
+        if (authenticated == null) {
+            throw new UnauthorizedException();
+        }
+        authenticated.updatePassword(pinField.getText());
         System.out.println("Password updated");
-        app.getRouter().gotoMainMenu();
+        router.goTo(Views.MAIN_MENU);
     }
 
     @FXML
     public void onCancelPressed(ActionEvent e) {
-        app.getRouter().gotoMainMenu();
+        router.goTo(Views.MAIN_MENU);
     }
 }

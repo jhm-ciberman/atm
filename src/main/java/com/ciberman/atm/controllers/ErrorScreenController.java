@@ -1,17 +1,18 @@
 package com.ciberman.atm.controllers;
 
-import com.ciberman.atm.App;
+import com.ciberman.atm.Router;
+import com.ciberman.atm.exceptions.ATMError;
+import com.google.inject.Inject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 
-public class ErrorScreenController extends BaseController {
+public class ErrorScreenController {
 
-    private final String errorTitle;
-    private final String errorMessage;
-    private Runnable onOkClicked = null;
+    @Inject
+    private Router router;
 
     @FXML
     private Label errorTitleLabel;
@@ -20,43 +21,21 @@ public class ErrorScreenController extends BaseController {
     @FXML
     private Button okButton;
 
+    private String redirectTo;
 
-    public ErrorScreenController(App app, String errorTitle, String errorMessage, Runnable onOkClicked) {
-        super(app);
-        this.errorTitle = errorTitle;
-        this.errorMessage = errorMessage;
-        this.onOkClicked = onOkClicked;
-    }
-
-    public ErrorScreenController(App app, String errorTitle, String errorMessage) {
-        super(app);
-        this.errorTitle = errorTitle;
-        this.errorMessage = errorMessage;
-    }
-
-    @FXML
-    public void initialize() {
-        errorTitleLabel.setText(errorTitle);
-        errorMessageLabel.setText(errorMessage);
-        if (this.onOkClicked == null) {
+    public void showError(ATMError e) {
+        errorTitleLabel.setText(e.getTitle());
+        errorMessageLabel.setText(e.getDescription());
+        this.redirectTo = e.redirect();
+        if (this.redirectTo.isEmpty()) {
             okButton.setVisible(false);
         }
     }
 
-
-    /**
-     * @return Returns the name of the fxml file (without
-     * extension) of the view related to this controller.
-     */
-    @Override
-    public String getViewName() {
-        return "error";
-    }
-
     @FXML
     public void onOkPressed(ActionEvent event) {
-        if (this.onOkClicked != null) {
-            onOkClicked.run();
+        if (!this.redirectTo.isEmpty()) {
+            router.goTo(this.redirectTo);
         }
     }
 }

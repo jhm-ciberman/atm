@@ -1,16 +1,17 @@
 package com.ciberman.atm.controllers;
 
-import com.ciberman.atm.App;
+import com.ciberman.atm.Router;
+import com.ciberman.atm.Views;
+import com.google.inject.Inject;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 
-public class RetrieveCardController extends BaseController {
+public class RetrieveCardController {
+
+    @Inject
+    private Router router;
 
     private static final int WAITING_TIME = 8000;
-
-    public RetrieveCardController(App app) {
-        super(app);
-    }
 
     @FXML
     void initialize() {
@@ -24,16 +25,7 @@ public class RetrieveCardController extends BaseController {
                 return null;
             }
         };
-        sleeper.setOnSucceeded(event -> app.getRouter().gotoEnterCard());
+        sleeper.setOnSucceeded(event -> router.goTo(Views.ENTER_CARD));
         new Thread(sleeper).start();
-    }
-
-    /**
-     * @return Returns the name of the fxml file (without
-     * extension) of the view related to this controller.
-     */
-    @Override
-    public String getViewName() {
-        return "retrieve_card";
     }
 }

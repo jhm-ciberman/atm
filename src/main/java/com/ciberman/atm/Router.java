@@ -1,72 +1,46 @@
 package com.ciberman.atm;
 
-import com.ciberman.atm.controllers.*;
-import com.ciberman.atm.services.Authenticatable;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.net.URL;
 
-/**
- * Represents the Application Router.
- * It has all the app routes, and redirects the requests between the controllers.
- */
 public class Router {
 
-    private Stage primaryStage;
+    @Inject
+    Injector injector;
 
-    private App app;
-
-    Router(App app) {
-        this.app = app;
-    }
-
-    public void setPrimaryStage(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-    }
-
-    public void gotoError(String errorTitle, String errorMessage, Runnable callback) {
-        this.changeScene(new ErrorScreenController(app, errorTitle, errorMessage, callback));
-    }
-
-    public void gotoError(String errorTitle, String errorMessage) {
-        this.changeScene(new ErrorScreenController(app, errorTitle, errorMessage));
-    }
-
-    public void gotoLogin(Authenticatable authenticatable) {
-        this.changeScene(new LoginController(app, authenticatable));
-    }
-
-    public void gotoMainMenu() {
-        this.changeScene(new MainMenuController(app));
-    }
-    public void gotoRetrieveCard() {
-        this.changeScene(new RetrieveCardController(app));
-    }
-    public void gotoEnterCard() {
-        this.changeScene(new EnterCardController(app));
-    }
-
-
+    @Nullable
+    static Stage primaryStage;
 
     /**
-     * Changes the actual scene of the stage. (The content of the window)
-     *
-     * @param controller The controller to use as the active controller
+     * Loads a new view. Returns the associated controller.
+     * @param viewName The view fxml file name (without extension)
+     * @param <T> The controller
+     * @return The controller
      */
-    public void changeScene(BaseController controller) {
-        URL url = getClass().getResource("/views/" + controller.getViewName() + ".fxml");
-        FXMLLoader loader = new FXMLLoader(url);
-        loader.setController(controller);
-        try {
-            Parent root = loader.load();
-            primaryStage.setScene(new Scene(root));
-        } catch (IOException e) {
-            e.printStackTrace(); // TODO: replace with a custom error view
+    public <T> T goTo( String viewName) {
+        if (this.primaryStage == null) {
+            System.err.println("No primary stage defined");
+            return null;
         }
-
+        try {
+            URL url = getClass().getResource("/views/" + viewName + ".fxml");
+            FXMLLoader loader = new FXMLLoader(url);
+            loader.setControllerFactory(c -> this.injector.getInstance(c));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            return loader.getController();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

@@ -5,6 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" minHeight="500.0" minWidth="500.0"
+            fx:controller="com.ciberman.atm.controllers.LoginController"
             xmlns="http://javafx.com/javafx/8.0.121">
     <center>
         <VBox alignment="CENTER" maxWidth="700.0" spacing="30.0" BorderPane.alignment="CENTER">

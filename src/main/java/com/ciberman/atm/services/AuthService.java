@@ -4,39 +4,21 @@ import com.ciberman.atm.exceptions.AuthenticationException;
 import com.ciberman.atm.exceptions.MaxLoginAttemptsReachedException;
 import com.ciberman.atm.util.Passwords;
 
+
 public class AuthService {
-
-    public AuthService() {
-
-    }
 
     /**
      * Match a given password with an Authenticatable instance.
-     * @param authenticatable The Authenticatable instance to authenticate against
+     * @param authenticatable The user to authenticate
      * @param password        The password to validate
      * @throws AuthenticationException If the password is incorrect
      * @throws MaxLoginAttemptsReachedException If the max login attempts is reached
      */
-    public void check(Authenticatable authenticatable, String password) throws AuthenticationException, MaxLoginAttemptsReachedException {
-        if (this.hasTooManyAttempts(authenticatable)) {
-            throw new MaxLoginAttemptsReachedException();
-        }
-
-        if (!Passwords.isExpectedPassword(
+    public boolean check(Authenticatable authenticatable, String password) throws AuthenticationException, MaxLoginAttemptsReachedException {
+        return (Passwords.isExpectedPassword(
                 password.toCharArray(),
                 authenticatable.getSalt(),
-                authenticatable.getPassword())) {
-
-            authenticatable.failLogin();
-
-            if (this.hasTooManyAttempts(authenticatable)) {
-                throw new MaxLoginAttemptsReachedException();
-            }
-
-            throw new AuthenticationException(authenticatable);
-        }
-
-        authenticatable.resetLoginAttempts();
+                authenticatable.getPassword()));
     }
 
     /**
@@ -48,6 +30,4 @@ public class AuthService {
     public boolean hasTooManyAttempts(Authenticatable authenticatable) {
         return (authenticatable.getFailedLoginAttempts() >= authenticatable.getMaxLoginAttempts());
     }
-
-
 }
