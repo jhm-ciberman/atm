@@ -19,32 +19,32 @@ public class MainMenuController {
 
     @FXML
     public void onPasswordChangePressed(ActionEvent e) {
-
+        router.goTo(Views.CHANGE_PASSWORD);
     }
 
     @FXML
     public void onCheckBalancePressed(ActionEvent e) {
-
+        router.goTo(Views.CHANGE_PASSWORD);
     }
 
     @FXML
     public void onRetrieveMoneyPressed(ActionEvent e) {
-
+        router.goTo(Views.CHANGE_PASSWORD);
     }
 
     @FXML
     public void onDepositMoneyPressed(ActionEvent e) {
-
+        router.goTo(Views.CHANGE_PASSWORD);
     }
 
     @FXML
     public void onTransferMoneyPressed(ActionEvent e) {
-
+        router.goTo(Views.CHANGE_PASSWORD);
     }
 
     @FXML
     public void onCheckTransactionsPressed(ActionEvent e) {
-
+        router.goTo(Views.CHANGE_PASSWORD);
     }
 
 }
