@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.net.URL;
 
 public class Router {
@@ -25,22 +24,37 @@ public class Router {
      * @param <T> The controller
      * @return The controller
      */
-    public <T> T goTo( String viewName) {
+    @Nullable
+    public <T> T goTo(String viewName) {
         if (primaryStage == null) {
             System.err.println("No primary stage defined");
             return null;
         }
         try {
-            URL url = getClass().getResource("/views/" + viewName + ".fxml");
-            FXMLLoader loader = new FXMLLoader(url);
-            loader.setControllerFactory(c -> this.injector.getInstance(c));
+            FXMLLoader loader = this.createLoaderForView(viewName);
             Parent root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             return loader.getController();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Throwable e) {
+            // Prevents infinite loops when an error happens when loading the error view
+            if (!viewName.equals(ErrorHandler.errorView)) {
+                this.handleError(e);
+            } else {
+                e.printStackTrace();
+            }
         }
         return null;
+    }
+
+    private FXMLLoader createLoaderForView(String viewName) {
+        URL url = getClass().getResource("/views/" + viewName + ".fxml");
+        FXMLLoader loader = new FXMLLoader(url);
+        loader.setControllerFactory(c -> this.injector.getInstance(c));
+        return loader;
+    }
+
+    private void handleError(Throwable throwable) {
+        this.injector.getInstance(ErrorHandler.class).handle(throwable);
     }
 }

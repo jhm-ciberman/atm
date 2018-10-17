@@ -27,7 +27,9 @@ public class ChangePasswordController {
         String pin = pinField.getText();
 
         ChangePasswordConfirmController controller = router.goTo(Views.CHANGE_PASSWORD_CONFIRM);
-        controller.setPreviousPin(pin);
+        if (controller != null) {
+            controller.setPreviousPin(pin);
+        }
     }
 
     @FXML

@@ -9,6 +9,8 @@ class ErrorHandler {
     @Inject
     Router router;
 
+    public final static String errorView = Views.ERROR;
+
     /**
      * Handles the passed exception
      *
@@ -16,8 +18,10 @@ class ErrorHandler {
      */
     void handle(Throwable e) {
         if (e instanceof ATMError) {
-            ErrorScreenController controller = router.goTo(Views.ERROR);
-            controller.showError((ATMError) e);
+            ErrorScreenController controller = router.goTo(errorView);
+            if (controller != null) {
+                controller.showError((ATMError) e);
+            }
             return;
         }
 
@@ -25,8 +29,10 @@ class ErrorHandler {
         if (cause == null) {
             // Unknown error
             e.printStackTrace();
-            ErrorScreenController controller = router.goTo(Views.ERROR);
-            controller.showError(new ATMError(e));
+            ErrorScreenController controller = router.goTo(errorView);
+            if (controller != null) {
+                controller.showError(new ATMError(e));
+            }
             return;
         }
 

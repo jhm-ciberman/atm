@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="200.0" prefWidth="400.0"
-            fx:controller="com.ciberman.atm.controllers.MainMenuController"
-            xmlns="http://javafx.com/javafx/8.0.121">
+            xmlns="http://javafx.com/javafx/8.0.121" fx:controller="com.ciberman.atm.controllers.MainMenuController">
     <left>
         <VBox spacing="20.0" BorderPane.alignment="CENTER">
             <padding>
@@ -75,7 +74,7 @@
         </VBox>
     </right>
     <top>
-        <Label text="Bienvenido" BorderPane.alignment="CENTER">
+        <Label fx:id="welcomeLabel" text="Bienvenido" BorderPane.alignment="CENTER">
             <font>
                 <Font name="Calibri Bold" size="42.0"/>
             </font>
