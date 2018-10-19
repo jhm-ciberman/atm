@@ -14,14 +14,18 @@ public class Account {
     }
 
     public String getName() {
-        return "Bank Account";
+        return "Cuenta";
     }
 
     public BigInteger getBalance() {
         return balance;
     }
 
-    public void setBalance(BigInteger balance) {
-        this.balance = balance;
+    public void deposit(BigInteger amount) {
+        this.balance = this.balance.add(amount);
+    }
+
+    public void withdraw(BigInteger amount) {
+        this.balance = this.balance.subtract(amount);
     }
 }

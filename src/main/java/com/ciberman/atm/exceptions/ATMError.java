@@ -1,6 +1,6 @@
 package com.ciberman.atm.exceptions;
 
-public class ATMError extends Exception {
+public class ATMError extends RuntimeException {
 
     private String title;
     private String description;

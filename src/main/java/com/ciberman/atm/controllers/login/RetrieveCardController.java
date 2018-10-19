@@ -1,4 +1,4 @@
-package com.ciberman.atm.controllers;
+package com.ciberman.atm.controllers.login;
 
 import com.ciberman.atm.Router;
 import com.ciberman.atm.Views;

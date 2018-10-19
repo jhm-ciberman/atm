@@ -4,6 +4,7 @@ package com.ciberman.atm.controllers;
 import com.ciberman.atm.AppContext;
 import com.ciberman.atm.Router;
 import com.ciberman.atm.Views;
+import com.ciberman.atm.controllers.transactions.AccountSelectController;
 import com.ciberman.atm.exceptions.UnauthorizedException;
 import com.ciberman.atm.models.Account;
 import com.ciberman.atm.models.Card;
@@ -59,12 +60,12 @@ public class MainMenuController {
 
     @FXML
     public void onRetrieveMoneyPressed(ActionEvent e) {
-        router.goTo(Views.CHANGE_PASSWORD);
+        router.goTo(Views.WITHDRAW_AMOUNT);
     }
 
     @FXML
     public void onDepositMoneyPressed(ActionEvent e) {
-        router.goTo(Views.CHANGE_PASSWORD);
+        router.goTo(Views.DEPOSIT_AMOUNT);
     }
 
     @FXML

@@ -1,9 +1,7 @@
-package com.ciberman.atm.controllers;
+package com.ciberman.atm.controllers.transactions;
 
-import com.ciberman.atm.exceptions.UnauthorizedException;
 import com.ciberman.atm.models.Account;
 import javafx.fxml.FXML;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 
@@ -15,11 +13,6 @@ public class TransferController extends BaseTransferController {
     @FXML
     void onContinuePressed() {
 
-    }
-
-    @NotNull
-    protected Account getDestinationAccountOrFail() throws UnauthorizedException {
-        return this.destinationAccount;
     }
 
     @Nullable

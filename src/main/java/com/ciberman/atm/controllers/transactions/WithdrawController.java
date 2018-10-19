@@ -1,4 +1,4 @@
-package com.ciberman.atm.controllers;
+package com.ciberman.atm.controllers.transactions;
 
 import com.ciberman.atm.exceptions.UnauthorizedException;
 import com.ciberman.atm.models.Account;

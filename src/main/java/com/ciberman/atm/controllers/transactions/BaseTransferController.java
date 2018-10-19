@@ -1,4 +1,4 @@
-package com.ciberman.atm.controllers;
+package com.ciberman.atm.controllers.transactions;
 
 import com.ciberman.atm.AppContext;
 import com.ciberman.atm.Router;
@@ -28,12 +28,7 @@ public abstract class BaseTransferController {
         router.goTo(Views.MAIN_MENU);
     }
 
-    @FXML
-    void onContinuePressed() throws UnauthorizedException {
-
-    }
-
-    protected Account getAccountOrFail() throws UnauthorizedException {
+    protected Account getAccountOrFail() {
         if (this.account == null) {
             throw new UnauthorizedException();
         }

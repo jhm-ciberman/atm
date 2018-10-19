@@ -1,4 +1,4 @@
-package com.ciberman.atm.controllers;
+package com.ciberman.atm.controllers.password;
 
 import com.ciberman.atm.AppContext;
 import com.ciberman.atm.Router;
