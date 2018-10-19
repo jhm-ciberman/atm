@@ -1,18 +1,14 @@
 package com.ciberman.atm.controllers;
 
-import com.ciberman.atm.Router;
+import com.ciberman.atm.Views;
 import com.ciberman.atm.exceptions.ATMError;
-import com.google.inject.Inject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 
-public class ErrorScreenController {
-
-    @Inject
-    private Router router;
+public class ErrorScreenController extends BaseController {
 
     @FXML
     private Label errorTitleLabel;
@@ -21,21 +17,29 @@ public class ErrorScreenController {
     @FXML
     private Button okButton;
 
-    private String redirectTo;
+    private Class<? extends BaseController> redirectTo;
 
-    public void showError(ATMError e) {
+    private ATMError error;
+
+    public ErrorScreenController setATMError(ATMError e) {
         errorTitleLabel.setText(e.getTitle());
         errorMessageLabel.setText(e.getDescription());
         this.redirectTo = e.redirect();
-        if (this.redirectTo.isEmpty()) {
+        if (this.redirectTo == null) {
             okButton.setVisible(false);
         }
+        return this;
     }
 
     @FXML
     public void onOkPressed(ActionEvent event) {
-        if (!this.redirectTo.isEmpty()) {
-            router.goTo(this.redirectTo);
+        if (this.redirectTo != null) {
+            router.showController(this.redirectTo);
         }
+    }
+
+    @Override
+    public String getViewName() {
+        return Views.ERROR;
     }
 }

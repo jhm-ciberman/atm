@@ -3,25 +3,28 @@ package com.ciberman.atm;
 import com.ciberman.atm.controllers.ErrorScreenController;
 import com.ciberman.atm.exceptions.ATMError;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 
-class ErrorHandler {
-
-    @Inject
-    Router router;
+public class ErrorHandler {
 
     public final static String errorView = Views.ERROR;
+
+    @Inject
+    private Injector injector;
+
+    @Inject
+    private Router router;
 
     /**
      * Handles the passed exception
      *
      * @param e The exception to handle
      */
-    void handle(Throwable e) {
+    public void handle(Throwable e) {
         if (e instanceof ATMError) {
-            ErrorScreenController controller = router.goTo(errorView);
-            if (controller != null) {
-                controller.showError((ATMError) e);
-            }
+            router.makeController(ErrorScreenController.class)
+                    .setATMError((ATMError) e)
+                    .andShowView();
             return;
         }
 
@@ -29,10 +32,9 @@ class ErrorHandler {
         if (cause == null) {
             // Unknown error
             e.printStackTrace();
-            ErrorScreenController controller = router.goTo(errorView);
-            if (controller != null) {
-                controller.showError(new ATMError(e));
-            }
+            router.makeController(ErrorScreenController.class)
+                    .setATMError(new ATMError(e))
+                    .andShowView();
             return;
         }
 

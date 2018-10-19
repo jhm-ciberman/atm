@@ -13,6 +13,7 @@ public class Account {
         this.balance = balance;
     }
 
+    @SuppressWarnings("SameReturnValue")
     public String getName() {
         return "Cuenta";
     }

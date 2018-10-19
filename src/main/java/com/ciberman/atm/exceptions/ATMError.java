@@ -1,5 +1,8 @@
 package com.ciberman.atm.exceptions;
 
+import com.ciberman.atm.controllers.BaseController;
+import org.jetbrains.annotations.Nullable;
+
 public class ATMError extends RuntimeException {
 
     private String title;
@@ -36,7 +39,8 @@ public class ATMError extends RuntimeException {
         this.description = description;
     }
 
-    public String redirect() {
-        return "";
+    @Nullable
+    public Class<? extends BaseController> redirect() {
+        return null;
     }
 }

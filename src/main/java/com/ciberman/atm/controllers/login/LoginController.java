@@ -1,8 +1,8 @@
 package com.ciberman.atm.controllers.login;
 
 import com.ciberman.atm.AppContext;
-import com.ciberman.atm.Router;
 import com.ciberman.atm.Views;
+import com.ciberman.atm.controllers.BaseController;
 import com.ciberman.atm.exceptions.AuthenticationException;
 import com.ciberman.atm.exceptions.MaxLoginAttemptsReachedException;
 import com.ciberman.atm.exceptions.UnauthorizedException;
@@ -16,21 +16,16 @@ import javafx.scene.control.PasswordField;
 /**
  * The controller for the PIN login screen.
  */
-public class LoginController {
+public class LoginController extends BaseController {
 
     @Inject
     private AuthService auth;
 
     @Inject
-    private Router router;
-
-    @Inject
     private AppContext appContext;
-
 
     @FXML
     private PasswordField pinField;
-
 
     @FXML
     public void onContinuePressed(ActionEvent actionEvent) throws AuthenticationException, MaxLoginAttemptsReachedException, UnauthorizedException {
@@ -53,11 +48,16 @@ public class LoginController {
         authenticatable.resetLoginAttempts();
         appContext.setAuthenticated(authenticatable);
         System.out.println("Login successful");
-        router.goTo(Views.MAIN_MENU);
+        router.showMainMenu();
     }
 
     @FXML
     public void onCancelPressed(ActionEvent e) {
-        router.goTo(Views.RETRIEVE_CARD);
+        router.makeController(RetrieveCardController.class).andShowView();
+    }
+
+    @Override
+    public String getViewName() {
+        return Views.LOGIN;
     }
 }

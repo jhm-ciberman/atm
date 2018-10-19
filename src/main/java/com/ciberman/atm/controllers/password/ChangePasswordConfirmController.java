@@ -1,8 +1,8 @@
 package com.ciberman.atm.controllers.password;
 
 import com.ciberman.atm.AppContext;
-import com.ciberman.atm.Router;
 import com.ciberman.atm.Views;
+import com.ciberman.atm.controllers.BaseController;
 import com.ciberman.atm.exceptions.ATMError;
 import com.ciberman.atm.exceptions.PinsDontMatchException;
 import com.ciberman.atm.services.Authenticatable;
@@ -11,13 +11,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 
-public class ChangePasswordConfirmController {
+public class ChangePasswordConfirmController extends BaseController {
 
     @Inject
     private AppContext appContext;
-
-    @Inject
-    private Router router;
 
     @FXML
     private PasswordField pinField;
@@ -37,15 +34,21 @@ public class ChangePasswordConfirmController {
         authenticated.updatePassword(pin);
 
         System.out.println("Password updated");
-        router.goTo(Views.CHANGE_PASSWORD_SUCCESS);
+        router.makeController(ChangePasswordSuccessController.class).andShowView();
     }
 
-    void setPreviousPin(String pin) {
+    ChangePasswordConfirmController setPreviousPin(String pin) {
         previousPin = pin;
+        return this;
     }
 
     @FXML
     public void onCancelPressed(ActionEvent e) {
-        router.goTo(Views.MAIN_MENU);
+        router.showMainMenu();
+    }
+
+    @Override
+    public String getViewName() {
+        return Views.CHANGE_PASSWORD_CONFIRM;
     }
 }

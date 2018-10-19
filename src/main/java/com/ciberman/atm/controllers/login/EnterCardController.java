@@ -1,8 +1,8 @@
 package com.ciberman.atm.controllers.login;
 
 import com.ciberman.atm.AppContext;
-import com.ciberman.atm.Router;
 import com.ciberman.atm.Views;
+import com.ciberman.atm.controllers.BaseController;
 import com.ciberman.atm.exceptions.InvalidCardException;
 import com.ciberman.atm.models.ATM;
 import com.ciberman.atm.models.Card;
@@ -14,13 +14,10 @@ import javafx.scene.control.TextField;
 
 import java.math.BigInteger;
 
-public class EnterCardController {
+public class EnterCardController extends BaseController {
 
     @FXML
     private TextField cardNumberField;
-
-    @Inject
-    private Router router;
 
     @Inject
     private AppContext appContext;
@@ -42,10 +39,15 @@ public class EnterCardController {
 
         if (card != null) {
             appContext.setAuthenticatable(card);
-            router.goTo(Views.LOGIN);
+            router.showController(LoginController.class);
         } else {
             throw new InvalidCardException(number);
         }
 
+    }
+
+    @Override
+    public String getViewName() {
+        return Views.ENTER_CARD;
     }
 }

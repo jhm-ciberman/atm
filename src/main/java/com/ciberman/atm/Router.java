@@ -1,5 +1,7 @@
 package com.ciberman.atm;
 
+import com.ciberman.atm.controllers.BaseController;
+import com.ciberman.atm.controllers.MainMenuController;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import javafx.fxml.FXMLLoader;
@@ -16,26 +18,26 @@ public class Router {
     Injector injector;
 
     @Nullable
-    static Stage primaryStage;
+    public static Stage primaryStage;
 
-    /**
-     * Loads a new view. Returns the associated controller.
-     * @param viewName The view fxml file name (without extension)
-     * @param <T> The controller
-     * @return The controller
-     */
-    @Nullable
-    public <T> T goTo(String viewName) {
+    public <T extends BaseController> T makeController(Class<T> controllerClass) {
+        return injector.getInstance(controllerClass);
+    }
+
+    public void showController(BaseController controller) {
         if (primaryStage == null) {
             System.err.println("No primary stage defined");
-            return null;
+            return;
         }
+        String viewName = controller.getViewName();
         try {
-            FXMLLoader loader = this.createLoaderForView(viewName);
+            URL url = getClass().getResource("/views/" + viewName + ".fxml");
+            FXMLLoader loader = new FXMLLoader(url);
+            loader.setController(controller);
             Parent root = loader.load();
+
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
-            return loader.getController();
         } catch (Throwable e) {
             // Prevents infinite loops when an error happens when loading the error view
             if (!viewName.equals(ErrorHandler.errorView)) {
@@ -44,17 +46,20 @@ public class Router {
                 e.printStackTrace();
             }
         }
-        return null;
     }
 
-    private FXMLLoader createLoaderForView(String viewName) {
-        URL url = getClass().getResource("/views/" + viewName + ".fxml");
-        FXMLLoader loader = new FXMLLoader(url);
-        loader.setControllerFactory(c -> this.injector.getInstance(c));
-        return loader;
+
+    public void showMainMenu() {
+        this.makeController(MainMenuController.class).andShowView();
+    }
+
+    public <T extends BaseController> void showController(Class<T> controllerClass) {
+        this.makeController(controllerClass).andShowView();
     }
 
     private void handleError(Throwable throwable) {
         this.injector.getInstance(ErrorHandler.class).handle(throwable);
+
     }
+
 }

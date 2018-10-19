@@ -1,8 +1,8 @@
 package com.ciberman.atm.controllers.transactions;
 
 import com.ciberman.atm.AppContext;
-import com.ciberman.atm.Router;
 import com.ciberman.atm.Views;
+import com.ciberman.atm.controllers.BaseController;
 import com.ciberman.atm.exceptions.NoAccountsException;
 import com.ciberman.atm.exceptions.UnauthorizedException;
 import com.ciberman.atm.models.Account;
@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Iterator;
 import java.util.function.Consumer;
 
-public class AccountSelectController {
+public class AccountSelectController extends BaseController {
 
     @FXML
     private VBox accountButtonsContainer;
@@ -26,14 +26,12 @@ public class AccountSelectController {
     @Inject
     private AppContext appContext;
 
-    @Inject
-    private Router router;
-
     @Nullable
     private Consumer<Account> callback = null;
 
-    public void setCallback(@Nullable Consumer<Account> callback) {
+    public AccountSelectController setCallback(@Nullable Consumer<Account> callback) {
         this.callback = callback;
+        return this;
     }
 
     @FXML
@@ -69,6 +67,11 @@ public class AccountSelectController {
 
     @FXML
     public void onCancelPressed() {
-        router.goTo(Views.MAIN_MENU);
+        router.showMainMenu();
+    }
+
+    @Override
+    public String getViewName() {
+        return Views.ACCOUNT_SELECT;
     }
 }

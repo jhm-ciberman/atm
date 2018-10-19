@@ -1,15 +1,11 @@
 package com.ciberman.atm.controllers.login;
 
-import com.ciberman.atm.Router;
 import com.ciberman.atm.Views;
-import com.google.inject.Inject;
+import com.ciberman.atm.controllers.BaseController;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 
-public class RetrieveCardController {
-
-    @Inject
-    private Router router;
+public class RetrieveCardController extends BaseController {
 
     private static final int WAITING_TIME = 8000;
 
@@ -25,7 +21,12 @@ public class RetrieveCardController {
                 return null;
             }
         };
-        sleeper.setOnSucceeded(event -> router.goTo(Views.ENTER_CARD));
+        sleeper.setOnSucceeded(event -> router.makeController(EnterCardController.class).andShowView());
         new Thread(sleeper).start();
+    }
+
+    @Override
+    public String getViewName() {
+        return Views.RETRIEVE_CARD;
     }
 }

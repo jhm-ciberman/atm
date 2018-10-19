@@ -1,15 +1,13 @@
 package com.ciberman.atm.controllers;
 
-import com.ciberman.atm.Router;
 import com.ciberman.atm.Views;
 import com.ciberman.atm.models.Account;
-import com.google.inject.Inject;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 import java.math.BigInteger;
 
-public class ShowBalanceController {
+public class ShowBalanceController extends BaseController {
 
     @FXML
     private Label balanceLabel;
@@ -17,19 +15,28 @@ public class ShowBalanceController {
     @FXML
     private Label accountNameLabel;
 
-    @Inject
-    private Router router;
+    private Account account;
 
     @FXML
     private void onCancelPressed() {
-        router.goTo(Views.MAIN_MENU);
+        router.showMainMenu();
     }
 
-    public void showBalanceFor(Account account) {
+    @FXML
+    private void initialize() {
         BigInteger balance = account.getBalance();
         String str = "$ " + balance.toString();
         balanceLabel.setText(str);
         accountNameLabel.setText(account.getName());
     }
 
+    public ShowBalanceController setAccount(Account account) {
+        this.account = account;
+        return this;
+    }
+
+    @Override
+    public String getViewName() {
+        return Views.SHOW_BALANCE;
+    }
 }

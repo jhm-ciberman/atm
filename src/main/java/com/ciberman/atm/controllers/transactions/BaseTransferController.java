@@ -1,8 +1,7 @@
 package com.ciberman.atm.controllers.transactions;
 
 import com.ciberman.atm.AppContext;
-import com.ciberman.atm.Router;
-import com.ciberman.atm.Views;
+import com.ciberman.atm.controllers.BaseController;
 import com.ciberman.atm.exceptions.UnauthorizedException;
 import com.ciberman.atm.models.Account;
 import com.google.inject.Inject;
@@ -10,12 +9,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class BaseTransferController {
+public abstract class BaseTransferController extends BaseController {
     @FXML
     protected TextField amountTextField;
-
-    @Inject
-    protected Router router;
 
     @Inject
     protected AppContext context;
@@ -25,7 +21,7 @@ public abstract class BaseTransferController {
 
     @FXML
     public void onCancelPressed() {
-        router.goTo(Views.MAIN_MENU);
+        router.showMainMenu();
     }
 
     protected Account getAccountOrFail() {

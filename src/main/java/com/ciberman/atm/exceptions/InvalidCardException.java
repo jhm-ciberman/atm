@@ -1,6 +1,7 @@
 package com.ciberman.atm.exceptions;
 
-import com.ciberman.atm.Views;
+import com.ciberman.atm.controllers.BaseController;
+import com.ciberman.atm.controllers.login.RetrieveCardController;
 
 import java.math.BigInteger;
 
@@ -20,7 +21,7 @@ public class InvalidCardException extends ATMError {
     }
 
     @Override
-    public String redirect() {
-        return Views.RETRIEVE_CARD;
+    public Class<? extends BaseController> redirect() {
+        return RetrieveCardController.class;
     }
 }

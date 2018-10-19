@@ -1,5 +1,6 @@
 package com.ciberman.atm.controllers.transactions;
 
+import com.ciberman.atm.Views;
 import com.ciberman.atm.exceptions.UnauthorizedException;
 import com.ciberman.atm.models.Account;
 import javafx.fxml.FXML;
@@ -14,5 +15,10 @@ public class WithdrawController extends BaseTransferController {
 
         BigInteger amount = new BigInteger(amountTextField.getText());
         account.withdraw(amount);
+    }
+
+    @Override
+    public String getViewName() {
+        return Views.WITHDRAW_AMOUNT;
     }
 }

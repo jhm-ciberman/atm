@@ -2,9 +2,12 @@
 package com.ciberman.atm.controllers;
 
 import com.ciberman.atm.AppContext;
-import com.ciberman.atm.Router;
 import com.ciberman.atm.Views;
+import com.ciberman.atm.controllers.login.RetrieveCardController;
+import com.ciberman.atm.controllers.password.ChangePasswordController;
 import com.ciberman.atm.controllers.transactions.AccountSelectController;
+import com.ciberman.atm.controllers.transactions.DepositController;
+import com.ciberman.atm.controllers.transactions.WithdrawController;
 import com.ciberman.atm.exceptions.UnauthorizedException;
 import com.ciberman.atm.models.Account;
 import com.ciberman.atm.models.Card;
@@ -14,16 +17,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class MainMenuController {
-
-    @Inject
-    private Router router;
+public class MainMenuController extends BaseController {
 
     @Inject
     private AppContext appContext;
 
     @FXML
     private Label welcomeLabel;
+
 
     @FXML
     void initialize() throws UnauthorizedException {
@@ -34,43 +35,46 @@ public class MainMenuController {
 
     @FXML
     public void onExitPressed(ActionEvent e) {
-        router.goTo(Views.RETRIEVE_CARD);
+
+        router.showController(RetrieveCardController.class);
     }
 
 
     @FXML
     public void onPasswordChangePressed(ActionEvent e) {
-        router.goTo(Views.CHANGE_PASSWORD);
+        router.showController(ChangePasswordController.class);
     }
 
     @FXML
     public void onCheckBalancePressed(ActionEvent e) {
-        AccountSelectController controller = router.goTo(Views.ACCOUNT_SELECT);
-        if (controller != null) {
-            controller.setCallback(this::showBalance);
-        }
+        router.makeController(AccountSelectController.class)
+                .setCallback(this::showBalance)
+                .andShowView();
     }
 
     private void showBalance(Account account) {
-        ShowBalanceController controller = router.goTo(Views.SHOW_BALANCE);
-        if (controller != null) {
-            controller.showBalanceFor(account);
-        }
+        router.makeController(ShowBalanceController.class)
+                .setAccount(account)
+                .andShowView();
     }
 
     @FXML
     public void onRetrieveMoneyPressed(ActionEvent e) {
-        router.goTo(Views.WITHDRAW_AMOUNT);
+        router.showController(WithdrawController.class);
     }
 
     @FXML
     public void onDepositMoneyPressed(ActionEvent e) {
-        router.goTo(Views.DEPOSIT_AMOUNT);
+        router.showController(DepositController.class);
     }
 
     @FXML
     public void onCheckTransactionsPressed(ActionEvent e) {
-        router.goTo(Views.CHANGE_PASSWORD);
+        router.showController(ChangePasswordController.class);
     }
 
+    @Override
+    public String getViewName() {
+        return Views.MAIN_MENU;
+    }
 }

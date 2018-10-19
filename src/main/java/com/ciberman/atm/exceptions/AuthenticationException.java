@@ -1,6 +1,7 @@
 package com.ciberman.atm.exceptions;
 
-import com.ciberman.atm.Views;
+import com.ciberman.atm.controllers.BaseController;
+import com.ciberman.atm.controllers.login.LoginController;
 import com.ciberman.atm.services.Authenticatable;
 
 public class AuthenticationException extends ATMError {
@@ -16,7 +17,7 @@ public class AuthenticationException extends ATMError {
     }
 
     @Override
-    public String redirect() {
-        return Views.LOGIN;
+    public Class<? extends BaseController> redirect() {
+        return LoginController.class;
     }
 }

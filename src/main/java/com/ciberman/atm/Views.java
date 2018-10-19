@@ -16,5 +16,5 @@ public class Views {
     public static final String WITHDRAW_AMOUNT = "withdraw_amount";
     public static final String DEPOSIT_AMOUNT = "deposit_amount";
 
-    static final String ERROR = "error";
+    public static final String ERROR = "error";
 }

@@ -1,7 +1,7 @@
 package com.ciberman.atm.controllers.transactions;
 
+import com.ciberman.atm.Views;
 import com.ciberman.atm.models.Account;
-import javafx.fxml.FXML;
 import org.jetbrains.annotations.Nullable;
 
 
@@ -9,11 +9,6 @@ public class TransferController extends BaseTransferController {
 
     @Nullable
     private Account destinationAccount;
-
-    @FXML
-    void onContinuePressed() {
-
-    }
 
     @Nullable
     public Account getDestinationAccount() {
@@ -24,4 +19,8 @@ public class TransferController extends BaseTransferController {
         this.destinationAccount = account;
     }
 
+    @Override
+    public String getViewName() {
+        return Views.TRANSFER_AMOUNT;
+    }
 }

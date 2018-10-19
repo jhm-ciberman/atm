@@ -1,5 +1,6 @@
 package com.ciberman.atm;
 
+import com.ciberman.atm.controllers.login.EnterCardController;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import javafx.application.Application;
@@ -38,8 +39,8 @@ public class Main extends Application {
 
         Thread.setDefaultUncaughtExceptionHandler((Thread thread, Throwable throwable) -> injector.getInstance(ErrorHandler.class).handle(throwable));
 
-        Router router = injector.getInstance(Router.class);
-        router.goTo(Views.ENTER_CARD);
+        injector.getInstance(Router.class)
+                .showController(EnterCardController.class);
 
         primaryStage.show();
     }

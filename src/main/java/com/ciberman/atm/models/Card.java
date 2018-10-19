@@ -14,7 +14,7 @@ public class Card extends Authenticatable implements Serializable {
 
     private User owner;
 
-    private List<Account> accounts = new LinkedList<>();
+    private final List<Account> accounts = new LinkedList<>();
 
     public Card(BigInteger number, String password, User owner) {
         this.number = number;
