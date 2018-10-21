@@ -1,10 +1,8 @@
 package com.ciberman.atm.services;
 
-import com.ciberman.atm.models.ATM;
-import com.ciberman.atm.models.Account;
-import com.ciberman.atm.models.Card;
-import com.ciberman.atm.models.User;
+import com.ciberman.atm.models.*;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 public class ATMProvider {
@@ -29,10 +27,10 @@ public class ATMProvider {
         Card card = new Card(new BigInteger("123456789"), "1234", user);
         atm.cards.add(card);
 
-        Account account1 = new Account(new BigInteger("1234"));
+        Account account1 = new SavingsAccount(new BigDecimal("1234"));
         card.addAccount(account1);
 
-        Account account2 = new Account(new BigInteger("5678"));
+        Account account2 = new SavingsAccount(new BigDecimal("5678"));
         card.addAccount(account2);
 
 

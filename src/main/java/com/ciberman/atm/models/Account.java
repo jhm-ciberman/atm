@@ -1,15 +1,15 @@
 package com.ciberman.atm.models;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 
-public class Account {
-    private BigInteger balance;
+public abstract class Account {
+    private BigDecimal balance;
 
     public Account() {
-        this.balance = new BigInteger("0");
+        this.balance = new BigDecimal("0");
     }
 
-    public Account(BigInteger balance) {
+    public Account(BigDecimal balance) {
         this.balance = balance;
     }
 
@@ -18,15 +18,15 @@ public class Account {
         return "Cuenta";
     }
 
-    public BigInteger getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void deposit(BigInteger amount) {
+    public void deposit(BigDecimal amount) {
         this.balance = this.balance.add(amount);
     }
 
-    public void withdraw(BigInteger amount) {
+    public void withdraw(BigDecimal amount) {
         this.balance = this.balance.subtract(amount);
     }
 }

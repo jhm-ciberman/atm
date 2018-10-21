@@ -22,9 +22,7 @@ public class ErrorHandler {
      */
     public void handle(Throwable e) {
         if (e instanceof ATMError) {
-            router.makeController(ErrorScreenController.class)
-                    .setATMError((ATMError) e)
-                    .andShowView();
+            this.showError((ATMError) e);
             return;
         }
 
@@ -32,12 +30,17 @@ public class ErrorHandler {
         if (cause == null) {
             // Unknown error
             e.printStackTrace();
-            router.makeController(ErrorScreenController.class)
-                    .setATMError(new ATMError(e))
-                    .andShowView();
+            this.showError(new ATMError(e));
             return;
         }
 
         this.handle(cause); // Recursive
+    }
+
+    private void showError(ATMError e) {
+        System.err.println(e);
+        router.makeController(ErrorScreenController.class)
+                .setATMError(e)
+                .andShowView();
     }
 }

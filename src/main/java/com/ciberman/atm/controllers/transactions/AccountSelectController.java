@@ -4,21 +4,23 @@ import com.ciberman.atm.AppContext;
 import com.ciberman.atm.Views;
 import com.ciberman.atm.controllers.BaseController;
 import com.ciberman.atm.exceptions.NoAccountsException;
-import com.ciberman.atm.exceptions.UnauthorizedException;
 import com.ciberman.atm.models.Account;
 import com.ciberman.atm.models.Card;
 import com.google.inject.Inject;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import org.jetbrains.annotations.Nullable;
 
+import java.net.URL;
 import java.util.Iterator;
+import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
-public class AccountSelectController extends BaseController {
+public class AccountSelectController extends BaseController implements Initializable {
 
     @FXML
     private VBox accountButtonsContainer;
@@ -34,8 +36,17 @@ public class AccountSelectController extends BaseController {
         return this;
     }
 
-    @FXML
-    void initialize() throws UnauthorizedException, NoAccountsException {
+
+    /**
+     * Called to initialize a controller after its root element has been
+     * completely processed.
+     *
+     * @param location  The location used to resolve relative paths for the root object, or
+     *                  {@code null} if the location is not known.
+     * @param resources The resources used to localize the root object, or {@code null} if
+     */
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         Card card = (Card) appContext.getAuthenticatedOrFail();
         Iterator<Account> accountIterator = card.getAccounts();
 
@@ -74,4 +85,5 @@ public class AccountSelectController extends BaseController {
     public String getViewName() {
         return Views.ACCOUNT_SELECT;
     }
+
 }

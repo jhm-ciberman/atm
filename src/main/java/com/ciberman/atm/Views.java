@@ -3,7 +3,7 @@ package com.ciberman.atm;
 public class Views {
     public static final String CHANGE_PASSWORD = "change_password";
     public static final String CHANGE_PASSWORD_CONFIRM = "change_password_confirm";
-    public static final String CHANGE_PASSWORD_SUCCESS = "change_password_success";
+    public static final String SUCCESS = "success";
 
     public static final String ENTER_CARD = "enter_card";
     public static final String LOGIN = "login";

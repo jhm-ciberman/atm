@@ -3,6 +3,7 @@ package com.ciberman.atm.controllers.password;
 import com.ciberman.atm.AppContext;
 import com.ciberman.atm.Views;
 import com.ciberman.atm.controllers.BaseController;
+import com.ciberman.atm.controllers.SuccessController;
 import com.ciberman.atm.exceptions.ATMError;
 import com.ciberman.atm.exceptions.PinsDontMatchException;
 import com.ciberman.atm.services.Authenticatable;
@@ -34,7 +35,7 @@ public class ChangePasswordConfirmController extends BaseController {
         authenticated.updatePassword(pin);
 
         System.out.println("Password updated");
-        router.makeController(ChangePasswordSuccessController.class).andShowView();
+        router.makeController(SuccessController.class).andShowView();
     }
 
     ChangePasswordConfirmController setPreviousPin(String pin) {
