@@ -12,9 +12,6 @@ public class Views {
     public static final String ACCOUNT_SELECT = "account_select";
     public static final String SHOW_BALANCE = "show_balance";
 
-    public static final String TRANSFER_AMOUNT = "transfer_amount";
-    public static final String WITHDRAW_AMOUNT = "withdraw_amount";
-    public static final String DEPOSIT_AMOUNT = "deposit_amount";
-
     public static final String ERROR = "error";
+    public static final String STRING_INPUT = "string_input";
 }

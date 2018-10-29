@@ -27,10 +27,10 @@ public class ATMProvider {
         Card card = new Card(new BigInteger("123456789"), "1234", user);
         atm.cards.add(card);
 
-        Account account1 = new SavingsAccount(new BigDecimal("1234"));
+        Account account1 = new SavingsAccount("123", new BigDecimal("1234"));
         card.addAccount(account1);
 
-        Account account2 = new SavingsAccount(new BigDecimal("5678"));
+        Account account2 = new SavingsAccount("456", new BigDecimal("5678"));
         card.addAccount(account2);
 
 

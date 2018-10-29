@@ -5,10 +5,10 @@ import com.ciberman.atm.views.login.RetrieveCardView;
 
 import java.math.BigInteger;
 
-public class InvalidCardException extends ATMError {
+public class CardNotFoundException extends ATMError {
     private final BigInteger cardNumber;
 
-    public InvalidCardException(BigInteger cardNumber) {
+    public CardNotFoundException(BigInteger cardNumber) {
         super(
                 "La tarjeta ingresada no es válida",
                 "Compruebe que la tarjeta corresponde a un banco aderhido a la red del Banco de la Plaza."

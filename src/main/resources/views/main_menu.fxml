@@ -54,7 +54,8 @@
                     <Font name="Calibri" size="25.0"/>
                 </font>
             </Button>
-            <Button alignment="BASELINE_RIGHT" mnemonicParsing="false" prefWidth="320.0" text="Transferencia de Dinero">
+            <Button alignment="BASELINE_RIGHT" mnemonicParsing="false" onAction="#onTransferMoneyPressed"
+                    prefWidth="320.0" text="Transferencia de Dinero">
                 <padding>
                     <Insets bottom="30.0" left="30.0" right="30.0" top="30.0"/>
                 </padding>

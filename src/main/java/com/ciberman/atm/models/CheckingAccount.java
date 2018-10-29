@@ -8,8 +8,8 @@ public class CheckingAccount extends Account {
 
     private BigDecimal overdraft;
 
-    public CheckingAccount(BigDecimal balance, BigDecimal overdraft) {
-        super(balance);
+    public CheckingAccount(String cbu, BigDecimal balance, BigDecimal overdraft) {
+        super(cbu, balance);
         this.overdraft = overdraft;
     }
 

@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 
 public class SalaryAccount extends SavingsAccount {
 
-    public SalaryAccount(BigDecimal balance) {
-        super(balance);
+    public SalaryAccount(String cbu, BigDecimal balance) {
+        super(cbu, balance);
     }
 
     @Override

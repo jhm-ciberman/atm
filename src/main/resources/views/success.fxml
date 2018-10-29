@@ -30,7 +30,8 @@
                 </font>
             </Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onCancelPressed" prefWidth="200.0" text="ENTENDIDO">
+                <Button fx:id="button" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                        onAction="#onCancelPressed" prefWidth="200.0" text="ENTENDIDO">
                     <font>
                         <Font name="Calibri" size="20.0" />
                     </font>

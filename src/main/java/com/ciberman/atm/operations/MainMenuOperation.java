@@ -13,6 +13,12 @@ public class MainMenuOperation extends Operation {
     @Inject
     private ChangePinOperation changePinOperation;
 
+    @Inject
+    private TransferOperation transferOperation;
+
+    @Inject
+    private DepositOperation depositOperation;
+
     public void start(Card card, Runnable onFinish) {
         String name = card.getOwner().getName();
         router.showController(new MainMenuView(
@@ -30,8 +36,10 @@ public class MainMenuOperation extends Operation {
                 withdrawOperation.start(card, () -> this.start(card, onFinish));
                 break;
             case DEPOSIT:
+                depositOperation.start(card, () -> this.start(card, onFinish));
                 break;
             case TRANSFER:
+                transferOperation.start(card, () -> this.start(card, onFinish));
                 break;
             case SHOW_BALANCE:
                 break;

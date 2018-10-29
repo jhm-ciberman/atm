@@ -5,8 +5,8 @@ import java.math.BigDecimal;
 public class SavingsAccount extends Account {
 
 
-    public SavingsAccount(BigDecimal balance) {
-        super(balance);
+    public SavingsAccount(String cbu, BigDecimal balance) {
+        super(cbu, balance);
     }
 
     @Override

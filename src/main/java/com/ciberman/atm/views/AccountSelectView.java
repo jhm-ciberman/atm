@@ -1,9 +1,8 @@
-package com.ciberman.atm.views.transactions;
+package com.ciberman.atm.views;
 
 import com.ciberman.atm.Views;
 import com.ciberman.atm.models.Account;
 import com.ciberman.atm.models.Card;
-import com.ciberman.atm.views.BaseView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -43,7 +42,7 @@ public class AccountSelectView extends BaseView implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Iterator<Account> accountIterator = this.card.getAccounts();
+        Iterator<Account> accountIterator = this.card.getAccounts().iterator();
 
         // Foreach account, create a new button
         accountIterator.forEachRemaining((account) -> {

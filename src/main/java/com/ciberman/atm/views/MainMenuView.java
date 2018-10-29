@@ -52,9 +52,16 @@ public class MainMenuView extends BaseView implements Initializable {
     }
 
     @FXML
+    public void onTransferMoneyPressed(ActionEvent e) {
+        this.onOptionSelected.accept(MainMenuOption.TRANSFER);
+    }
+
+
+    @FXML
     public void onDepositMoneyPressed(ActionEvent e) {
         this.onOptionSelected.accept(MainMenuOption.DEPOSIT);
     }
+
 
     @FXML
     public void onCheckTransactionsPressed(ActionEvent e) {

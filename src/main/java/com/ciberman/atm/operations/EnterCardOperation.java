@@ -1,6 +1,6 @@
 package com.ciberman.atm.operations;
 
-import com.ciberman.atm.exceptions.InvalidCardException;
+import com.ciberman.atm.exceptions.CardNotFoundException;
 import com.ciberman.atm.models.Card;
 import com.ciberman.atm.services.CardFinder;
 import com.ciberman.atm.views.login.EnterCardView;
@@ -19,9 +19,9 @@ public class EnterCardOperation extends Operation {
             try {
                 Card card = cardFinder.findCard(cardNumber);
                 andThen.accept(card);
-            } catch (InvalidCardException e) {
+            } catch (CardNotFoundException e) {
                 this.showError(
-                        new InvalidCardException(cardNumber),
+                        new CardNotFoundException(cardNumber),
                         () -> this.retrieveCard(andThen)
                 );
             }
