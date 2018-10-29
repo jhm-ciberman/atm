@@ -1,4 +1,4 @@
-package com.ciberman.atm.controllers;
+package com.ciberman.atm.views;
 
 import com.ciberman.atm.Views;
 import javafx.event.ActionEvent;
@@ -6,13 +6,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import org.jetbrains.annotations.Nullable;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 @SuppressWarnings("WeakerAccess")
-public class SuccessController extends BaseController implements Initializable {
+public class SuccessView extends BaseView implements Initializable {
 
     @FXML
     private Label titleLabel;
@@ -23,16 +22,26 @@ public class SuccessController extends BaseController implements Initializable {
     @FXML
     private Button button;
 
-    @Nullable
+
     private String title;
-    @Nullable
+
     private String subtitle;
-    @Nullable
+
     private String buttonText;
+
+    private Runnable onCancelPressed;
+
+
+    public SuccessView(String title, String subtitle, String buttonText, Runnable onCancelPressed) {
+        this.title = title;
+        this.subtitle = subtitle;
+        this.buttonText = buttonText;
+        this.onCancelPressed = onCancelPressed;
+    }
 
     @FXML
     public void onCancelPressed(ActionEvent e) {
-        router.showMainMenu();
+        this.onCancelPressed.run();
     }
 
     /**
@@ -54,21 +63,6 @@ public class SuccessController extends BaseController implements Initializable {
         if (this.buttonText != null) {
             this.button.setText(this.buttonText);
         }
-    }
-
-    public SuccessController setTitle(String text) {
-        this.title = text;
-        return this;
-    }
-
-    public SuccessController setSubtitle(String text) {
-        this.subtitle = text;
-        return this;
-    }
-
-    public SuccessController setButtonText(String text) {
-        this.buttonText = text;
-        return this;
     }
 
     @Override

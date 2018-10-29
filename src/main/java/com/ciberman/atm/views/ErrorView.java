@@ -1,4 +1,4 @@
-package com.ciberman.atm.controllers;
+package com.ciberman.atm.views;
 
 import com.ciberman.atm.Views;
 import com.ciberman.atm.exceptions.ATMError;
@@ -7,32 +7,38 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import org.jetbrains.annotations.Nullable;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class ErrorScreenController extends BaseController implements Initializable {
+public class ErrorView extends BaseView implements Initializable {
 
     @FXML
     private Label errorTitleLabel;
+
     @FXML
     private Label errorMessageLabel;
+
     @FXML
     private Button okButton;
 
     private ATMError error;
 
-    public ErrorScreenController setATMError(ATMError e) {
-        this.error = e;
-        return this;
+    @Nullable
+    private Runnable andThen;
+
+    public ErrorView(ATMError error, @Nullable Runnable andThen) {
+        this.error = error;
+        this.andThen = andThen;
     }
 
     @FXML
     public void onOkPressed(ActionEvent event) {
         System.out.println(this.error.redirect());
-        if (this.error.redirect() != null) {
-            router.showController(this.error.redirect());
+        if (this.andThen != null) {
+            this.andThen.run();
         }
     }
 

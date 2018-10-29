@@ -1,16 +1,22 @@
-package com.ciberman.atm.controllers.login;
+package com.ciberman.atm.views.login;
 
 import com.ciberman.atm.Views;
-import com.ciberman.atm.controllers.BaseController;
+import com.ciberman.atm.views.BaseView;
 import javafx.concurrent.Task;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class RetrieveCardController extends BaseController implements Initializable {
+public class RetrieveCardView extends BaseView implements Initializable {
 
     private static final int WAITING_TIME = 8000;
+
+    private Runnable onContinue;
+
+    public RetrieveCardView(Runnable onContinue) {
+        this.onContinue = onContinue;
+    }
 
     /**
      * Called to initialize a controller after its root element has been
@@ -32,7 +38,7 @@ public class RetrieveCardController extends BaseController implements Initializa
                 return null;
             }
         };
-        sleeper.setOnSucceeded(event -> router.makeController(EnterCardController.class).andShowView());
+        sleeper.setOnSucceeded(event -> this.onContinue.run());
         new Thread(sleeper).start();
     }
 

@@ -1,5 +1,7 @@
 package com.ciberman.atm.models;
 
+import com.ciberman.atm.exceptions.InvalidOperationException;
+
 import java.math.BigDecimal;
 
 public abstract class Account {
@@ -26,7 +28,7 @@ public abstract class Account {
         this.balance = this.balance.add(amount);
     }
 
-    public void withdraw(BigDecimal amount) {
+    public void withdraw(BigDecimal amount) throws InvalidOperationException {
         this.balance = this.balance.subtract(amount);
     }
 }

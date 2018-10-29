@@ -1,41 +1,37 @@
-package com.ciberman.atm.controllers.transactions;
+package com.ciberman.atm.views.transactions;
 
-import com.ciberman.atm.AppContext;
 import com.ciberman.atm.Views;
-import com.ciberman.atm.controllers.BaseController;
-import com.ciberman.atm.exceptions.NoAccountsException;
 import com.ciberman.atm.models.Account;
 import com.ciberman.atm.models.Card;
-import com.google.inject.Inject;
+import com.ciberman.atm.views.BaseView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import org.jetbrains.annotations.Nullable;
 
 import java.net.URL;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
-public class AccountSelectController extends BaseController implements Initializable {
+public class AccountSelectView extends BaseView implements Initializable {
 
     @FXML
     private VBox accountButtonsContainer;
 
-    @Inject
-    private AppContext appContext;
+    private Consumer<Account> onAccountSelected;
 
-    @Nullable
-    private Consumer<Account> callback = null;
+    private Runnable onCancel;
 
-    public AccountSelectController setCallback(@Nullable Consumer<Account> callback) {
-        this.callback = callback;
-        return this;
+    private Card card;
+
+    public AccountSelectView(Card card, Consumer<Account> onAccountSelected, Runnable onCancel) {
+        this.card = card;
+        this.onAccountSelected = onAccountSelected;
+        this.onCancel = onCancel;
     }
-
 
     /**
      * Called to initialize a controller after its root element has been
@@ -47,21 +43,12 @@ public class AccountSelectController extends BaseController implements Initializ
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Card card = (Card) appContext.getAuthenticatedOrFail();
-        Iterator<Account> accountIterator = card.getAccounts();
-
-        if (!accountIterator.hasNext()) {
-            throw new NoAccountsException();
-        }
+        Iterator<Account> accountIterator = this.card.getAccounts();
 
         // Foreach account, create a new button
         accountIterator.forEachRemaining((account) -> {
             Button b = this.createAccountButton(account);
-            b.setOnAction((e) -> {
-                if (this.callback != null) {
-                    this.callback.accept(account);
-                }
-            });
+            b.setOnAction((e) -> this.onAccountSelected.accept(account));
             this.accountButtonsContainer.getChildren().add(b);
         });
     }
@@ -78,7 +65,7 @@ public class AccountSelectController extends BaseController implements Initializ
 
     @FXML
     public void onCancelPressed() {
-        router.showMainMenu();
+        this.onCancel.run();
     }
 
     @Override

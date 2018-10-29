@@ -1,7 +1,7 @@
 package com.ciberman.atm.exceptions;
 
-import com.ciberman.atm.controllers.BaseController;
-import com.ciberman.atm.controllers.password.ChangePasswordController;
+import com.ciberman.atm.views.BaseView;
+import com.ciberman.atm.views.password.ChangePinView;
 
 public class PinsDontMatchException extends ATMError {
 
@@ -10,7 +10,7 @@ public class PinsDontMatchException extends ATMError {
     }
 
     @Override
-    public Class<? extends BaseController> redirect() {
-        return ChangePasswordController.class;
+    public Class<? extends BaseView> redirect() {
+        return ChangePinView.class;
     }
 }

@@ -19,7 +19,7 @@ public class CheckingAccount extends Account {
     }
 
     @Override
-    public void withdraw(BigDecimal amount) {
+    public void withdraw(BigDecimal amount) throws InvalidOperationException {
         BigDecimal balanceAfter = getBalance().subtract(amount);
         if (balanceAfter.compareTo(this.overdraft) < 0) {
             throw new InvalidOperationException("Se superó el máximo monto descubierto");

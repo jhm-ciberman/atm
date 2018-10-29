@@ -1,7 +1,7 @@
 package com.ciberman.atm.exceptions;
 
-import com.ciberman.atm.controllers.BaseController;
-import com.ciberman.atm.controllers.MainMenuController;
+import com.ciberman.atm.views.BaseView;
+import com.ciberman.atm.views.MainMenuView;
 
 public class NoAccountsException extends ATMError {
     public NoAccountsException() {
@@ -10,7 +10,7 @@ public class NoAccountsException extends ATMError {
     }
 
     @Override
-    public Class<? extends BaseController> redirect() {
-        return MainMenuController.class;
+    public Class<? extends BaseView> redirect() {
+        return MainMenuView.class;
     }
 }

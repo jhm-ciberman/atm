@@ -1,4 +1,4 @@
-package com.ciberman.atm.controllers;
+package com.ciberman.atm.views;
 
 import com.ciberman.atm.Views;
 import com.ciberman.atm.models.Account;
@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ShowBalanceController extends BaseController implements Initializable {
+public class ShowBalanceView extends BaseView implements Initializable {
 
     @FXML
     private Label balanceLabel;
@@ -20,9 +20,16 @@ public class ShowBalanceController extends BaseController implements Initializab
 
     private Account account;
 
+    private Runnable onContinuePressed;
+
+    public ShowBalanceView(Account account, Runnable onContinuePressed) {
+        this.account = account;
+        this.onContinuePressed = onContinuePressed;
+    }
+
     @FXML
     private void onCancelPressed() {
-        router.showMainMenu();
+        this.onContinuePressed.run();
     }
 
     /**
@@ -41,7 +48,7 @@ public class ShowBalanceController extends BaseController implements Initializab
         accountNameLabel.setText(account.getName());
     }
 
-    public ShowBalanceController setAccount(Account account) {
+    public ShowBalanceView setAccount(Account account) {
         this.account = account;
         return this;
     }
