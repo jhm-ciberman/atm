@@ -7,13 +7,13 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class Bank {
-    private String name;
+    private final String name;
 
-    private BigInteger minRange;
+    private final BigInteger minRange;
 
-    private BigInteger maxRange;
+    private final BigInteger maxRange;
 
-    private Set<Card> cards = new LinkedHashSet<>();
+    private final Set<Card> cards = new LinkedHashSet<>();
 
     public Bank(String name, BigInteger minRange, BigInteger maxRange) {
         this.minRange = minRange;

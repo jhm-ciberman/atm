@@ -12,7 +12,7 @@ public class RetrieveCardView extends BaseView implements Initializable {
 
     private static final int WAITING_TIME = 8000;
 
-    private Runnable onContinue;
+    private final Runnable onContinue;
 
     public RetrieveCardView(Runnable onContinue) {
         this.onContinue = onContinue;

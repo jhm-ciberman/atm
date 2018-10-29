@@ -20,7 +20,7 @@ public class ShowBalanceView extends BaseView implements Initializable {
 
     private Account account;
 
-    private Runnable onContinuePressed;
+    private final Runnable onContinuePressed;
 
     public ShowBalanceView(Account account, Runnable onContinuePressed) {
         this.account = account;

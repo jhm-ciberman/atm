@@ -23,13 +23,13 @@ public class SuccessView extends BaseView implements Initializable {
     private Button button;
 
 
-    private String title;
+    private final String title;
 
-    private String subtitle;
+    private final String subtitle;
 
-    private String buttonText;
+    private final String buttonText;
 
-    private Runnable onCancelPressed;
+    private final Runnable onCancelPressed;
 
 
     public SuccessView(String title, String subtitle, String buttonText, Runnable onCancelPressed) {

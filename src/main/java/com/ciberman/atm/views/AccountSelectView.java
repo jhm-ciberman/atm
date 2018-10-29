@@ -20,11 +20,11 @@ public class AccountSelectView extends BaseView implements Initializable {
     @FXML
     private VBox accountButtonsContainer;
 
-    private Consumer<Account> onAccountSelected;
+    private final Consumer<Account> onAccountSelected;
 
-    private Runnable onCancel;
+    private final Runnable onCancel;
 
-    private Card card;
+    private final Card card;
 
     public AccountSelectView(Card card, Consumer<Account> onAccountSelected, Runnable onCancel) {
         this.card = card;

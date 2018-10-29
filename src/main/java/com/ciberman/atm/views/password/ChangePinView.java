@@ -18,9 +18,9 @@ public class ChangePinView extends BaseView {
     @FXML
     private PasswordField pinField;
 
-    private Consumer<String> onContinue;
+    private final Consumer<String> onContinue;
 
-    private Runnable onCancel;
+    private final Runnable onCancel;
 
 
     public ChangePinView(Consumer<String> onContinue, Runnable onCancel) {

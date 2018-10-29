@@ -14,7 +14,7 @@ public class EnterCardView extends BaseView {
     @FXML
     private TextField cardNumberField;
 
-    private Consumer<BigInteger> onCardNumber;
+    private final Consumer<BigInteger> onCardNumber;
 
     public EnterCardView(Consumer<BigInteger> onCardNumber) {
         this.onCardNumber = onCardNumber;

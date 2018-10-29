@@ -28,11 +28,11 @@ public class StringInputView extends BaseView implements Initializable {
     @FXML
     protected Button continueButton;
 
-    private Consumer<String> onAmountEntered;
+    private final Consumer<String> onAmountEntered;
 
-    private Runnable onCancel;
+    private final Runnable onCancel;
 
-    private StringInputViewData data;
+    private final StringInputViewData data;
 
     public StringInputView(StringInputViewData data, Consumer<String> onAmountEntered, Runnable onCancel) {
         this.data = data;

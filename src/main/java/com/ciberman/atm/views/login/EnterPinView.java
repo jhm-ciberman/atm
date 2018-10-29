@@ -16,9 +16,9 @@ public class EnterPinView extends BaseView {
     @FXML
     private PasswordField pinField;
 
-    private Consumer<String> onPinEntered;
+    private final Consumer<String> onPinEntered;
 
-    private Runnable onCancelPressed;
+    private final Runnable onCancelPressed;
 
     public EnterPinView(Consumer<String> onPinEntered, Runnable onCancelPressed) {
         this.onPinEntered = onPinEntered;

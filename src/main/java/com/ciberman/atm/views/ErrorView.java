@@ -24,10 +24,10 @@ public class ErrorView extends BaseView implements Initializable {
     @FXML
     private Button okButton;
 
-    private ATMError error;
+    private final ATMError error;
 
     @Nullable
-    private Runnable andThen;
+    private final Runnable andThen;
 
     public ErrorView(ATMError error, @Nullable Runnable andThen) {
         this.error = error;

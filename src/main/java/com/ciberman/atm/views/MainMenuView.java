@@ -21,9 +21,9 @@ public class MainMenuView extends BaseView implements Initializable {
     @FXML
     private Label welcomeLabel;
 
-    private String title;
+    private final String title;
 
-    private Consumer<MainMenuOption> onOptionSelected;
+    private final Consumer<MainMenuOption> onOptionSelected;
 
     public MainMenuView(String title, Consumer<MainMenuOption> onOptionSelected) {
         this.title = title;

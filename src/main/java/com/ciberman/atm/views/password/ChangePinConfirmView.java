@@ -20,9 +20,9 @@ public class ChangePinConfirmView extends BaseView {
 
     private String previousPin = "";
 
-    private Consumer<String> onContinue;
+    private final Consumer<String> onContinue;
 
-    private Runnable onCancel;
+    private final Runnable onCancel;
 
 
     public ChangePinConfirmView(Consumer<String> onContinue, Runnable onCancel) {
