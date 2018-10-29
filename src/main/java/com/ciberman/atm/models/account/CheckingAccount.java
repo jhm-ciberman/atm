@@ -1,4 +1,4 @@
-package com.ciberman.atm.models;
+package com.ciberman.atm.models.account;
 
 import com.ciberman.atm.exceptions.InvalidOperationException;
 

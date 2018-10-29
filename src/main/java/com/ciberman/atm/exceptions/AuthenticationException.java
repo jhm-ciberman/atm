@@ -1,8 +1,6 @@
 package com.ciberman.atm.exceptions;
 
 import com.ciberman.atm.services.Authenticatable;
-import com.ciberman.atm.views.BaseView;
-import com.ciberman.atm.views.login.EnterPinView;
 
 public class AuthenticationException extends ATMError {
     private final Authenticatable authenticatable;
@@ -16,8 +14,4 @@ public class AuthenticationException extends ATMError {
         return authenticatable;
     }
 
-    @Override
-    public Class<? extends BaseView> redirect() {
-        return EnterPinView.class;
-    }
 }

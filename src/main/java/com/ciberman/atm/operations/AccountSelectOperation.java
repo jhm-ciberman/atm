@@ -1,8 +1,8 @@
 package com.ciberman.atm.operations;
 
 import com.ciberman.atm.exceptions.NoAccountsException;
-import com.ciberman.atm.models.Account;
 import com.ciberman.atm.models.Card;
+import com.ciberman.atm.models.account.Account;
 import com.ciberman.atm.views.AccountSelectView;
 
 import java.util.function.Consumer;

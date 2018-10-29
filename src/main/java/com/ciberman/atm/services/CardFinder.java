@@ -2,6 +2,7 @@ package com.ciberman.atm.services;
 
 import com.ciberman.atm.exceptions.CardNotFoundException;
 import com.ciberman.atm.models.ATM;
+import com.ciberman.atm.models.Bank;
 import com.ciberman.atm.models.Card;
 import com.google.inject.Inject;
 
@@ -13,16 +14,24 @@ public class CardFinder {
     private ATMProvider atmProvider;
 
     public Card findCard(BigInteger number) throws CardNotFoundException {
+        Bank bank = this.findBank(number);
+        return this.findCard(bank, number);
+    }
+
+    private Bank findBank(BigInteger number) throws CardNotFoundException {
         ATM atm = atmProvider.getAtm();
-        Card card = atm.cards.stream()
-                .filter(e -> e.getNumber().equals(number))
+
+        return atm.banks.stream()
+                .filter(b -> b.isInRange(number))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new CardNotFoundException(number));
+    }
 
-        if (card == null) {
-            throw new CardNotFoundException(number);
-        }
-
-        return card;
+    private Card findCard(Bank bank, BigInteger number) throws CardNotFoundException {
+        return bank.getCards()
+                .stream()
+                .filter(c -> c.getNumber().equals(number))
+                .findFirst()
+                .orElseThrow(() -> new CardNotFoundException(number));
     }
 }

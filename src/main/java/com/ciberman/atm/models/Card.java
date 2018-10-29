@@ -1,5 +1,6 @@
 package com.ciberman.atm.models;
 
+import com.ciberman.atm.models.account.Account;
 import com.ciberman.atm.services.Authenticatable;
 
 import java.io.Serializable;

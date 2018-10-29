@@ -1,6 +1,6 @@
 package com.ciberman.atm.services;
 
-import com.ciberman.atm.models.Account;
+import com.ciberman.atm.models.account.Account;
 
 import java.math.BigDecimal;
 

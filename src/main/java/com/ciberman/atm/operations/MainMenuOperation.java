@@ -22,6 +22,9 @@ public class MainMenuOperation extends Operation {
     @Inject
     private ShowBalanceOperation showBalanceOperation;
 
+    @Inject
+    private ShowTransactionsOperation showTransactionsOperation;
+
     public void start(Card card, Runnable onFinish) {
         String name = card.getOwner().getName();
         router.showController(new MainMenuView(
@@ -48,6 +51,7 @@ public class MainMenuOperation extends Operation {
                 showBalanceOperation.start(card, () -> this.start(card, onFinish));
                 break;
             case SHOW_TRANSACTIONS:
+                showTransactionsOperation.start(card, () -> this.start(card, onFinish));
                 break;
             case END:
                 onFinish.run();

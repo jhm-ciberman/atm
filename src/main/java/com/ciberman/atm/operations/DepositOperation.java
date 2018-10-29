@@ -1,7 +1,7 @@
 package com.ciberman.atm.operations;
 
-import com.ciberman.atm.models.Account;
 import com.ciberman.atm.models.Card;
+import com.ciberman.atm.models.account.Account;
 import com.ciberman.atm.services.AccountService;
 import com.ciberman.atm.views.StringInputView;
 import com.ciberman.atm.views.StringInputViewData;

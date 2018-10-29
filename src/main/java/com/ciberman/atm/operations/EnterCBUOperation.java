@@ -1,7 +1,7 @@
 package com.ciberman.atm.operations;
 
 import com.ciberman.atm.exceptions.AccountNotFoundException;
-import com.ciberman.atm.models.Account;
+import com.ciberman.atm.models.account.Account;
 import com.ciberman.atm.services.AccountFinder;
 import com.ciberman.atm.views.StringInputView;
 import com.ciberman.atm.views.StringInputViewData;
@@ -27,9 +27,7 @@ public class EnterCBUOperation extends Operation {
             Account account = accountFinder.findAccount(cbu);
             onAccount.accept(account);
         } catch (AccountNotFoundException e) {
-            this.showError(e, () -> {
-                this.start(onAccount, onCancel);
-            });
+            this.showError(e, () -> this.start(onAccount, onCancel));
         }
 
     }

@@ -1,8 +1,5 @@
 package com.ciberman.atm.exceptions;
 
-import com.ciberman.atm.views.BaseView;
-import com.ciberman.atm.views.login.RetrieveCardView;
-
 import java.math.BigInteger;
 
 public class CardNotFoundException extends ATMError {
@@ -20,8 +17,4 @@ public class CardNotFoundException extends ATMError {
         return cardNumber;
     }
 
-    @Override
-    public Class<? extends BaseView> redirect() {
-        return RetrieveCardView.class;
-    }
 }

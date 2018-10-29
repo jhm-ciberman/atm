@@ -1,8 +1,5 @@
 package com.ciberman.atm.exceptions;
 
-import com.ciberman.atm.views.BaseView;
-import org.jetbrains.annotations.Nullable;
-
 public class ATMError extends Exception {
 
     private String title;
@@ -37,10 +34,5 @@ public class ATMError extends Exception {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @Nullable
-    public Class<? extends BaseView> redirect() {
-        return null;
     }
 }

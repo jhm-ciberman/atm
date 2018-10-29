@@ -36,7 +36,6 @@ public class ErrorView extends BaseView implements Initializable {
 
     @FXML
     public void onOkPressed(ActionEvent event) {
-        System.out.println(this.error.redirect());
         if (this.andThen != null) {
             this.andThen.run();
         }
@@ -57,15 +56,10 @@ public class ErrorView extends BaseView implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (this.error != null) {
-            errorTitleLabel.setText(this.error.getTitle());
-            errorMessageLabel.setText(this.error.getDescription());
-            if (this.error.redirect() == null) {
-                okButton.setVisible(false);
-            }
-        } else {
+        errorTitleLabel.setText(this.error.getTitle());
+        errorMessageLabel.setText(this.error.getDescription());
+        if (this.andThen == null) {
             okButton.setVisible(false);
-
         }
     }
 }

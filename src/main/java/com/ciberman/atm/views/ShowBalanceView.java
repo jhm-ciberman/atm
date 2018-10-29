@@ -1,7 +1,7 @@
 package com.ciberman.atm.views;
 
 import com.ciberman.atm.Views;
-import com.ciberman.atm.models.Account;
+import com.ciberman.atm.models.account.Account;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
