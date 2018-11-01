@@ -1,5 +1,6 @@
 package com.ciberman.atm.operations;
 
+import com.ciberman.atm.exceptions.InvalidOperationException;
 import com.ciberman.atm.models.Card;
 import com.ciberman.atm.models.account.Account;
 import com.ciberman.atm.services.AccountService;
@@ -11,10 +12,13 @@ public class TransferOperation extends Operation {
 
     @Inject
     EnterStringOperation enterStringOperation;
+
     @Inject
     private AccountSelectOperation accountSelectOperation;
+
     @Inject
     private EnterCBUOperation enterCBUOperation;
+
     @Inject
     private AccountService accountService;
 
@@ -53,13 +57,20 @@ public class TransferOperation extends Operation {
     }
 
     private void transfer(Account sourceAccount, Account destinationAccount, String amount, Runnable onFinish) {
-        accountService.transfer(sourceAccount, destinationAccount, amount);
+        try {
+            accountService.transfer(sourceAccount, destinationAccount, amount);
 
-        router.showController(new SuccessView(
-                "Transferencia correcta",
-                "La transferencia se ha realizado correctamente",
-                "Volver al menu",
-                onFinish
-        ));
+            router.showController(new SuccessView(
+                    "Transferencia correcta",
+                    "La transferencia se ha realizado correctamente",
+                    "Volver al menu",
+                    onFinish
+            ));
+
+        } catch (InvalidOperationException e) {
+            this.showErrorAndThen(e, onFinish);
+        }
+
+
     }
 }

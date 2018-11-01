@@ -20,7 +20,7 @@ public class EnterCardOperation extends Operation {
                 Card card = cardFinder.findCard(cardNumber);
                 andThen.accept(card);
             } catch (CardNotFoundException e) {
-                this.showError(
+                this.showErrorAndThen(
                         new CardNotFoundException(cardNumber),
                         () -> this.retrieveCard(andThen)
                 );

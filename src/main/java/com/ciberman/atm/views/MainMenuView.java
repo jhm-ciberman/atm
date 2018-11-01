@@ -1,9 +1,6 @@
 
 package com.ciberman.atm.views;
 
-import com.ciberman.atm.AppContext;
-import com.ciberman.atm.Views;
-import com.google.inject.Inject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,9 +11,6 @@ import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
 public class MainMenuView extends BaseView implements Initializable {
-
-    @Inject
-    private AppContext appContext;
 
     @FXML
     private Label welcomeLabel;

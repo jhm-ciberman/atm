@@ -6,9 +6,9 @@ import java.math.BigDecimal;
 
 public class DepositMovement implements Movement {
 
-    private Account account;
+    private final Account account;
 
-    private BigDecimal amount;
+    private final BigDecimal amount;
 
     public DepositMovement(Account account, BigDecimal amount) {
         this.account = account;

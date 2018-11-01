@@ -1,6 +1,5 @@
 package com.ciberman.atm.views;
 
-import com.ciberman.atm.Views;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

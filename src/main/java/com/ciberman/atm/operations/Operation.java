@@ -10,11 +10,11 @@ public abstract class Operation {
     @Inject
     protected Router router;
 
-    public void showError(ATMError e) {
+    public void showErrorAndDie(ATMError e) {
         router.showController(new ErrorView(e, null));
     }
 
-    public void showError(ATMError e, Runnable andThen) {
+    public void showErrorAndThen(ATMError e, Runnable andThen) {
         router.showController(new ErrorView(e, andThen));
     }
 

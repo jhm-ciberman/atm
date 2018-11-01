@@ -1,7 +1,7 @@
 package com.ciberman.atm.views.login;
 
-import com.ciberman.atm.Views;
 import com.ciberman.atm.views.BaseView;
+import com.ciberman.atm.views.Views;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;

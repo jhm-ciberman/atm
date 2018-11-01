@@ -1,9 +1,7 @@
 package com.ciberman.atm.views.password;
 
-import com.ciberman.atm.AppContext;
-import com.ciberman.atm.Views;
 import com.ciberman.atm.views.BaseView;
-import com.google.inject.Inject;
+import com.ciberman.atm.views.Views;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -11,9 +9,6 @@ import javafx.scene.control.PasswordField;
 import java.util.function.Consumer;
 
 public class ChangePinConfirmView extends BaseView {
-
-    @Inject
-    private AppContext appContext;
 
     @FXML
     private PasswordField pinField;

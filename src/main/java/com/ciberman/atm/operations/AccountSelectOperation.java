@@ -12,7 +12,7 @@ public class AccountSelectOperation extends Operation {
     public void start(Card card, Consumer<Account> onAccountSelect, Runnable onCancel) {
 
         if (card.getAccounts().isEmpty()) {
-            this.showError(new NoAccountsException(), onCancel);
+            this.showErrorAndThen(new NoAccountsException(), onCancel);
             return;
         }
 

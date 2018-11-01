@@ -29,9 +29,9 @@ public class LoginOperation extends Operation {
         try {
             cardAuthenticator.doLogin(card, pin);
         } catch (AuthenticationException e) {
-            this.showError(e, () -> this.start(card, andThen, onCancel));
+            this.showErrorAndThen(e, () -> this.start(card, andThen, onCancel));
         } catch (MaxLoginAttemptsReachedException e) {
-            this.showError(e);
+            this.showErrorAndDie(e);
         }
 
         System.out.println("Login successful");

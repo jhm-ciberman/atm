@@ -1,5 +1,6 @@
 package com.ciberman.atm.operations;
 
+import com.ciberman.atm.exceptions.InvalidOperationException;
 import com.ciberman.atm.models.Card;
 import com.ciberman.atm.models.account.Account;
 import com.ciberman.atm.services.AccountService;
@@ -45,7 +46,11 @@ public class WithdrawOperation extends Operation {
 
     private void withdraw(Account account, String amount, Runnable onFinish) {
 
-        accountService.withdraw(account, amount);
+        try {
+            accountService.withdraw(account, amount);
+        } catch (InvalidOperationException e) {
+            this.showErrorAndThen(e, () -> this.withdraw(account, amount, onFinish));
+        }
 
         router.showController(new SuccessView(
                 "Retire el dinero",

@@ -6,9 +6,9 @@ import java.math.BigDecimal;
 
 public class WithdrawMovement implements Movement {
 
-    private Account account;
+    private final Account account;
 
-    private BigDecimal amount;
+    private final BigDecimal amount;
 
     public WithdrawMovement(Account account, BigDecimal amount) {
         this.account = account;

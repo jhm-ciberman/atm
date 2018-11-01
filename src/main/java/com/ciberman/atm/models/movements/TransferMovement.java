@@ -6,11 +6,11 @@ import java.math.BigDecimal;
 
 public class TransferMovement implements Movement {
 
-    private Account sourceAccount;
+    private final Account sourceAccount;
 
-    private Account destinationAccount;
+    private final Account destinationAccount;
 
-    private BigDecimal amount;
+    private final BigDecimal amount;
 
     public TransferMovement(Account sourceAccount, Account destinationAccount, BigDecimal amount) {
         this.sourceAccount = sourceAccount;

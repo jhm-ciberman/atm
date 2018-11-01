@@ -27,7 +27,7 @@ public class EnterCBUOperation extends Operation {
             Account account = accountFinder.findAccount(cbu);
             onAccount.accept(account);
         } catch (AccountNotFoundException e) {
-            this.showError(e, () -> this.start(onAccount, onCancel));
+            this.showErrorAndThen(e, () -> this.start(onAccount, onCancel));
         }
 
     }

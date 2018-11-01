@@ -1,4 +1,4 @@
-package com.ciberman.atm;
+package com.ciberman.atm.views;
 
 public class Views {
     public static final String CHANGE_PASSWORD = "change_password";
@@ -11,6 +11,7 @@ public class Views {
     public static final String RETRIEVE_CARD = "retrieve_card";
     public static final String ACCOUNT_SELECT = "account_select";
     public static final String SHOW_BALANCE = "show_balance";
+    public static final String SHOW_MOVEMENTS = "show_movements";
 
     public static final String ERROR = "error";
     public static final String STRING_INPUT = "string_input";
