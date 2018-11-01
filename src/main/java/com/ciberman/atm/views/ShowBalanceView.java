@@ -45,6 +45,11 @@ public class ShowBalanceView extends BaseView implements Initializable {
         String str = "$ " + balance.toString();
         balanceLabel.setText(str);
         accountNameLabel.setText(account.getName());
+
+        // If negative balance, colour the text with red
+        if (balance.compareTo(BigDecimal.ZERO) < 0) {
+            balanceLabel.setStyle("-fx-text-fill: red ;");
+        }
     }
 
     public ShowBalanceView setAccount(Account account) {

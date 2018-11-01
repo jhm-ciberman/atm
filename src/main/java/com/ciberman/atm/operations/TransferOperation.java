@@ -68,7 +68,7 @@ public class TransferOperation extends Operation {
             ));
 
         } catch (InvalidOperationException e) {
-            this.showErrorAndThen(e, onFinish);
+            this.showErrorAndThen(e, () -> this.getAmount(sourceAccount, destinationAccount, onFinish));
         }
 
 

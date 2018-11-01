@@ -15,9 +15,12 @@ import java.util.ResourceBundle;
 public class ShowMovementsView extends BaseView implements Initializable {
 
     private final Account account;
+
     private final Runnable onFinish;
+
     @FXML
     private TableView<Movement> movementsTable;
+
     @FXML
     private Label accountNameLabel;
 
@@ -49,8 +52,8 @@ public class ShowMovementsView extends BaseView implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         this.accountNameLabel.setText(account.getName());
 
-        this.addColumn("Fecha", "amount");
-        this.addColumn("Descripción", "amount");
+        this.addColumn("Fecha", "date");
+        this.addColumn("Descripción", "description");
         this.addColumn("Monto", "amount");
 
         for (Movement movement : this.account.getMovements()) {

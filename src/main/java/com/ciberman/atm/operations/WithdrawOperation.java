@@ -48,15 +48,16 @@ public class WithdrawOperation extends Operation {
 
         try {
             accountService.withdraw(account, amount);
-        } catch (InvalidOperationException e) {
-            this.showErrorAndThen(e, () -> this.withdraw(account, amount, onFinish));
-        }
 
-        router.showController(new SuccessView(
-                "Retire el dinero",
-                "El dinero aparecerá en la parte inferior del cajero",
-                "Continuar",
-                onFinish
-        ));
+            router.showController(new SuccessView(
+                    "Retire el dinero",
+                    "El dinero aparecerá en la parte inferior del cajero",
+                    "Continuar",
+                    onFinish
+            ));
+
+        } catch (InvalidOperationException e) {
+            this.showErrorAndThen(e, () -> this.showWithdrawScreen(account, onFinish));
+        }
     }
 }

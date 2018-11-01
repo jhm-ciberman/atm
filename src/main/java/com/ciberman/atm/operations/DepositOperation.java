@@ -1,5 +1,6 @@
 package com.ciberman.atm.operations;
 
+import com.ciberman.atm.exceptions.InvalidOperationException;
 import com.ciberman.atm.models.Card;
 import com.ciberman.atm.models.account.Account;
 import com.ciberman.atm.services.AccountService;
@@ -44,13 +45,21 @@ public class DepositOperation extends Operation {
 
     private void deposit(Account account, String amountString, Runnable onFinish) {
 
+        try {
+            accountService.deposit(account, amountString);
 
-        router.showController(new SuccessView(
-                "Estupendo",
-                "El dinero fue depositado correctamente",
-                "Continuar",
-                onFinish
-        ));
+            router.showController(new SuccessView(
+                    "Estupendo",
+                    "El dinero fue depositado correctamente",
+                    "Continuar",
+                    onFinish
+            ));
+
+        } catch (InvalidOperationException e) {
+            this.showErrorAndThen(e, () -> this.showDepositScreen(account, onFinish));
+        }
+
+
     }
 
 }
