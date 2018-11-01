@@ -1,10 +1,10 @@
 package com.ciberman.atm.models;
 
+import com.ciberman.atm.models.account.Account;
 import com.ciberman.atm.services.Authenticatable;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class Card extends Authenticatable implements Serializable {
 
     private User owner;
 
-    private List<Account> accounts = new LinkedList<>();
+    private final List<Account> accounts = new LinkedList<>();
 
     public Card(BigInteger number, String password, User owner) {
         this.number = number;
@@ -42,7 +42,7 @@ public class Card extends Authenticatable implements Serializable {
         this.accounts.remove(account);
     }
 
-    public Iterator<Account> getAccounts() {
-        return this.accounts.iterator();
+    public List<Account> getAccounts() {
+        return this.accounts;
     }
 }

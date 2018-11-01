@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.172-ea">
+    <top>
+        <Label text="Movimientos de la cuenta" BorderPane.alignment="CENTER">
+            <font>
+                <Font name="Calibri Bold" size="42.0"/>
+            </font>
+            <padding>
+                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0"/>
+            </padding>
+        </Label>
+    </top>
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets/>
+            </BorderPane.margin>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onCancelPressed"
+                    prefHeight="63.0" prefWidth="214.0" text="VOLVER AL MENU">
+                <font>
+                    <Font name="Calibri" size="20.0"/>
+                </font>
+                <padding>
+                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                </padding>
+            </Button>
+        </HBox>
+    </bottom>
+    <center>
+        <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+            <Label fx:id="accountNameLabel" text="Nombre de la cuenta">
+                <font>
+                    <Font size="32.0"/>
+                </font>
+            </Label>
+            <TableView fx:id="movementsTable" prefHeight="200.0" prefWidth="200.0">
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>

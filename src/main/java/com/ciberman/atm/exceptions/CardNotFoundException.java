@@ -1,13 +1,11 @@
 package com.ciberman.atm.exceptions;
 
-import com.ciberman.atm.Views;
-
 import java.math.BigInteger;
 
-public class InvalidCardException extends ATMError {
+public class CardNotFoundException extends ATMError {
     private final BigInteger cardNumber;
 
-    public InvalidCardException(BigInteger cardNumber) {
+    public CardNotFoundException(BigInteger cardNumber) {
         super(
                 "La tarjeta ingresada no es válida",
                 "Compruebe que la tarjeta corresponde a un banco aderhido a la red del Banco de la Plaza."
@@ -19,8 +17,4 @@ public class InvalidCardException extends ATMError {
         return cardNumber;
     }
 
-    @Override
-    public String redirect() {
-        return Views.RETRIEVE_CARD;
-    }
 }

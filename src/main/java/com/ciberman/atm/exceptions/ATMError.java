@@ -35,8 +35,4 @@ public class ATMError extends Exception {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public String redirect() {
-        return "";
-    }
 }

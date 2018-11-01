@@ -1,5 +1,6 @@
 package com.ciberman.atm;
 
+import com.ciberman.atm.views.BaseView;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import javafx.fxml.FXMLLoader;
@@ -16,45 +17,24 @@ public class Router {
     Injector injector;
 
     @Nullable
-    static Stage primaryStage;
+    public static Stage primaryStage;
 
-    /**
-     * Loads a new view. Returns the associated controller.
-     * @param viewName The view fxml file name (without extension)
-     * @param <T> The controller
-     * @return The controller
-     */
-    @Nullable
-    public <T> T goTo(String viewName) {
+    public void showController(BaseView controller) {
         if (primaryStage == null) {
             System.err.println("No primary stage defined");
-            return null;
+            return;
         }
+        String viewName = controller.getViewName();
         try {
-            FXMLLoader loader = this.createLoaderForView(viewName);
+            URL url = getClass().getResource("/views/" + viewName + ".fxml");
+            FXMLLoader loader = new FXMLLoader(url);
+            loader.setController(controller);
             Parent root = loader.load();
+
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
-            return loader.getController();
         } catch (Throwable e) {
-            // Prevents infinite loops when an error happens when loading the error view
-            if (!viewName.equals(ErrorHandler.errorView)) {
-                this.handleError(e);
-            } else {
-                e.printStackTrace();
-            }
+            e.printStackTrace();
         }
-        return null;
-    }
-
-    private FXMLLoader createLoaderForView(String viewName) {
-        URL url = getClass().getResource("/views/" + viewName + ".fxml");
-        FXMLLoader loader = new FXMLLoader(url);
-        loader.setControllerFactory(c -> this.injector.getInstance(c));
-        return loader;
-    }
-
-    private void handleError(Throwable throwable) {
-        this.injector.getInstance(ErrorHandler.class).handle(throwable);
     }
 }

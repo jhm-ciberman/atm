@@ -9,7 +9,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<BorderPane minHeight="500.0" minWidth="500.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ciberman.atm.controllers.ChangePasswordSuccessController">
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" minHeight="500.0" minWidth="500.0"
+            xmlns="http://javafx.com/javafx/8.0.121">
     <center>
         <VBox alignment="CENTER" maxWidth="700.0" spacing="30.0" BorderPane.alignment="CENTER">
             <padding>
@@ -18,18 +19,19 @@
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../images/success.png"/>
             </ImageView>
-            <Label text="¡Estupendo!">
+            <Label fx:id="titleLabel" text="¡Estupendo!">
                 <font>
                     <Font name="Calibri" size="44.0" />
                 </font>
             </Label>
-            <Label text="El pin fue cambiado correctamente">
+            <Label fx:id="subtitleLabel" text="El pin fue cambiado correctamente">
                 <font>
                     <Font name="Calibri" size="18.0" />
                 </font>
             </Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onCancelPressed" prefWidth="200.0" text="ENTENDIDO">
+                <Button fx:id="button" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                        onAction="#onCancelPressed" prefWidth="200.0" text="ENTENDIDO">
                     <font>
                         <Font name="Calibri" size="20.0" />
                     </font>
