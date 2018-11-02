@@ -2,6 +2,7 @@ package com.ciberman.atm.services;
 
 import com.ciberman.atm.exceptions.AccountNotFoundException;
 import com.ciberman.atm.models.ATM;
+import com.ciberman.atm.models.ATMProvider;
 import com.ciberman.atm.models.Bank;
 import com.ciberman.atm.models.Card;
 import com.ciberman.atm.models.account.Account;

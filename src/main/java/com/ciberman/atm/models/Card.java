@@ -5,7 +5,7 @@ import com.ciberman.atm.services.Authenticatable;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Card extends Authenticatable implements Serializable {
@@ -14,7 +14,7 @@ public class Card extends Authenticatable implements Serializable {
 
     private User owner;
 
-    private final List<Account> accounts = new LinkedList<>();
+    private final List<Account> accounts = new ArrayList<>();
 
     public Card(BigInteger number, String password, User owner) {
         this.number = number;
