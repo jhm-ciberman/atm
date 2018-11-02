@@ -1,10 +1,10 @@
 package com.ciberman.atm.models.account;
 
-import com.ciberman.atm.exceptions.InvalidOperationException;
+import com.ciberman.atm.exceptions.InsufficientFundsException;
 import com.ciberman.atm.models.movements.Movement;
 
 import java.math.BigDecimal;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Account {
@@ -12,7 +12,7 @@ public abstract class Account {
 
     private final String cbu;
 
-    private final List<Movement> movements = new LinkedList<>();
+    private final List<Movement> movements = new ArrayList<>();
 
     public Account(String cbu) {
         this.balance = new BigDecimal("0");
@@ -41,7 +41,10 @@ public abstract class Account {
         this.balance = this.balance.add(amount);
     }
 
-    public void withdraw(BigDecimal amount) throws InvalidOperationException {
+    public void withdraw(BigDecimal amount) throws InsufficientFundsException {
+        if (getBalance().compareTo(amount) < 0) {
+            throw new InsufficientFundsException(this);
+        }
         this.balance = this.balance.subtract(amount);
     }
 

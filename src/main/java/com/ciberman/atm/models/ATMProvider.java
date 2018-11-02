@@ -1,15 +1,14 @@
-package com.ciberman.atm.services;
+package com.ciberman.atm.models;
 
 import com.ciberman.atm.exceptions.InvalidCardRangeException;
-import com.ciberman.atm.models.ATM;
-import com.ciberman.atm.models.Bank;
-import com.ciberman.atm.models.Card;
-import com.ciberman.atm.models.User;
 import com.ciberman.atm.models.account.SavingsAccount;
+import com.ciberman.atm.models.wallet.Wallet;
+import com.google.inject.Singleton;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
+@Singleton
 public class ATMProvider {
 
     /**
@@ -17,19 +16,22 @@ public class ATMProvider {
      */
     public ATM getAtm() {
         ATM atm = new ATM();
-        this.seed(atm);
+
+        atm.banks.add(this.createBank());
+
+        atm.walletsList.add(this.createWallet(100, 200));
+        atm.walletsList.add(this.createWallet(500, 200));
+        atm.walletsList.add(this.createWallet(50, 120));
+
         return atm;
     }
 
+    private Wallet createWallet(int billType, int amount) {
+        return new Wallet(new BigDecimal(billType), amount);
+    }
 
-    /**
-     * Seeds the passed ATM Database Model with random data
-     *
-     * @param atm The ATM Database model to seed
-     */
-    private void seed(ATM atm) {
+    private Bank createBank() {
         Bank bank = new Bank("Banco de la Plaza", new BigInteger("0"), new BigInteger("999999999"));
-        atm.banks.add(bank);
 
         try {
             User user = new User("Javier", "Mora");
@@ -42,6 +44,8 @@ public class ATMProvider {
         } catch (InvalidCardRangeException e) {
             e.printStackTrace();
         }
+
+        return bank;
 
     }
 

@@ -1,5 +1,6 @@
 package com.ciberman.atm.services;
 
+import com.ciberman.atm.exceptions.InsufficientFundsException;
 import com.ciberman.atm.exceptions.InvalidOperationException;
 import com.ciberman.atm.models.account.Account;
 import com.ciberman.atm.models.movements.Movement;
@@ -14,22 +15,34 @@ public class AccountService {
     @Inject
     private DateProvider dateProvider;
 
-    public void withdraw(Account account, String amountString) throws InvalidOperationException {
+    @Inject
+    private ExtractionService extractionService;
+
+    public void withdraw(Account account, String amountString) throws InvalidOperationException, InsufficientFundsException {
         BigDecimal amount = new BigDecimal(amountString);
-        if (!this.checkIsValid(amount)) {
+        if (this.checkIsInvalid(amount)) {
             throw new InvalidOperationException("El monto debe ser múltiplo de 100");
         }
 
         Date date = dateProvider.getCurrentDate();
 
-        account.withdraw(amount);
+        try {
+            extractionService.performDryRun(amount);
 
-        account.addMovement(new Movement(date, account, amount.negate()));
+            account.withdraw(amount);
+
+            account.addMovement(new Movement(date, account, amount.negate()));
+
+            extractionService.commit();
+        } catch (InvalidOperationException | InsufficientFundsException e) {
+            extractionService.rollback();
+            throw e;
+        }
     }
 
     public void deposit(Account account, String amountString) throws InvalidOperationException {
         BigDecimal amount = new BigDecimal(amountString);
-        if (!this.checkIsValid(amount)) {
+        if (this.checkIsInvalid(amount)) {
             throw new InvalidOperationException("El monto debe ser múltiplo de 100");
         }
 
@@ -40,10 +53,10 @@ public class AccountService {
         account.addMovement(new Movement(date, account, amount));
     }
 
-    public void transfer(Account sourceAccount, Account destinationAccount, String amountString) throws InvalidOperationException {
+    public void transfer(Account sourceAccount, Account destinationAccount, String amountString) throws InvalidOperationException, InsufficientFundsException {
         BigDecimal amount = new BigDecimal(amountString);
 
-        if (!this.checkIsValid(amount)) {
+        if (this.checkIsInvalid(amount)) {
             throw new InvalidOperationException("El monto debe ser múltiplo de 100");
         }
 
@@ -58,8 +71,8 @@ public class AccountService {
         destinationAccount.addMovement(incomingMovement);
     }
 
-    private boolean checkIsValid(BigDecimal amount) {
-        return (amount.remainder(new BigDecimal("100")).equals(BigDecimal.ZERO));
+    private boolean checkIsInvalid(BigDecimal amount) {
+        return (!amount.remainder(new BigDecimal("100")).equals(BigDecimal.ZERO));
     }
 
 }

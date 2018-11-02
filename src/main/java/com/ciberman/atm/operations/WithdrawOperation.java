@@ -1,5 +1,6 @@
 package com.ciberman.atm.operations;
 
+import com.ciberman.atm.exceptions.InsufficientFundsException;
 import com.ciberman.atm.exceptions.InvalidOperationException;
 import com.ciberman.atm.models.Card;
 import com.ciberman.atm.models.account.Account;
@@ -56,7 +57,7 @@ public class WithdrawOperation extends Operation {
                     onFinish
             ));
 
-        } catch (InvalidOperationException e) {
+        } catch (InvalidOperationException | InsufficientFundsException e) {
             this.showErrorAndThen(e, () -> this.showWithdrawScreen(account, onFinish));
         }
     }

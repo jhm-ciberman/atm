@@ -1,6 +1,6 @@
 package com.ciberman.atm.models.account;
 
-import com.ciberman.atm.exceptions.InvalidOperationException;
+import com.ciberman.atm.exceptions.InsufficientFundsException;
 
 import java.math.BigDecimal;
 
@@ -19,10 +19,10 @@ public class CheckingAccount extends Account {
     }
 
     @Override
-    public void withdraw(BigDecimal amount) throws InvalidOperationException {
+    public void withdraw(BigDecimal amount) throws InsufficientFundsException {
         BigDecimal balanceAfter = getBalance().subtract(amount);
         if (balanceAfter.compareTo(this.overdraft) < 0) {
-            throw new InvalidOperationException("Se superó el máximo monto descubierto");
+            throw new InsufficientFundsException(this);
         }
         super.withdraw(amount);
     }
